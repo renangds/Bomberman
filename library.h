@@ -43,6 +43,7 @@ SDL_Color menu_unselected = {255, 255, 255};
 SDL_Color color_menu1 = {240, 0, 111};
 SDL_Color color_menu2 = {237, 130, 2};
 SDL_Color color_menu3 = {109, 28, 9};
+SDL_Color background_status = {62, 101, 91};
 
 Mix_Chunk* sound_menu = null;
 Mix_Chunk* drop_bomb = null;

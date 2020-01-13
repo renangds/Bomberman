@@ -214,6 +214,8 @@ void init_modules(){
     main_music = Mix_LoadMUS("Musica/stage1.mp3");
 
     music_menu = Mix_LoadMUS("Musica/intro_music.mp3");
+
+    bomb_explosion = Mix_LoadWAV("Musica/boom.wav");
 }
 
 void ins_object(int x, int y, SDL_Surface* sour, SDL_Surface* dest, SDL_Surface* clip){
@@ -299,9 +301,11 @@ void menu_start(){
             }
         }
 
+        /*
         if(Mix_PlayingMusic() == 0){
             Mix_PlayMusic(music_menu, -1);
         }
+        */
 
         Uint8* keystates = SDL_GetKeyState(NULL);
 
@@ -356,7 +360,6 @@ void menu_start(){
             SDL_Delay( ( 1000 / 8 ) - get_ticks() );
         }
     }
-
 
     Mix_PauseMusic();
 
@@ -469,6 +472,7 @@ void bomb_timer(){
 
     if(((SDL_GetTicks()/1000) - BOMB.timeStart) > BOMB_DEFAULT){
         BOMB.bombStatus = false;
+        Mix_PlayChannel(-1, bomb_explosion, 0);
     }
 }
 
@@ -552,7 +556,7 @@ int main(){
     int quit = true;
 
     fase1 = IMG_Load("fase1.png");
-    bomb_sprites = IMG_Load("bomb.png");
+    bomb_sprites = IMG_Load("Sprites/bomb.png");
 
     ins_object(HERO.x, HERO.y, map_characters, screen, &HERO.front_clip[1]);
 
@@ -571,7 +575,7 @@ int main(){
         
         move_actor();
 
-        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0xFF, 0xFF, 0xFF ) );
+        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 62, 101, 91 ) );
 
         ins_object(0, 30, fase1, screen, null);
 
