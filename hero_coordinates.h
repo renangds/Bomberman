@@ -3,6 +3,7 @@ static struct hero{
     SDL_Rect behind_clip[3];
     SDL_Rect left_clip[3];
     SDL_Rect right_clip[3];
+    SDL_Rect heart_clip[2];
     int yVel;
     int xVel;
     int x;

@@ -131,6 +131,18 @@ void define_coordinates(){
     BOMB.bomb_img[8].h = 16;
     BOMB.bomb_img[8].w = 16;
 
+
+    //Heart Clips
+
+    HERO.heart_clip[0].x = 0;
+    HERO.heart_clip[0].y = 0;
+    HERO.heart_clip[0].h = 42;
+    HERO.heart_clip[0].w = 42;
+
+    HERO.heart_clip[1].x = 143;
+    HERO.heart_clip[1].y = 0;
+    HERO.heart_clip[1].h = 42;
+    HERO.heart_clip[1].w = 42;
 }
 
 void start(){
@@ -266,11 +278,9 @@ void instrucoes(){
     }
 
     SDL_free(telaInstrucao);
-
-    menu_start();
 }
 
-void menu_start(){
+int menu_start(){
     int option = 0;
     int quit = true;
 
@@ -368,8 +378,20 @@ void menu_start(){
     SDL_free(exitGame);
     SDL_free(telaIntro);
 
+    /*
     if(option == 1) instrucoes();
     if(option == 2) exit(1);
+    */
+
+   return option;
+}
+
+void sort_records(){
+    
+}
+
+void menu_records(){
+
 }
 
 void game_over(){
@@ -386,13 +408,13 @@ void game_over(){
     SDL_Delay(5000);
 
     SDL_free(img);
-
-    menu_start();
 }
 
-void its_gameover(){
+int its_gameover(){
     if(HERO.life == 0){
-        game_over();
+        return false;
+    } else{
+        return true;
     }
 }
 
@@ -529,41 +551,18 @@ void char_constructor(){
 }
 
 void game_start(){
-    
-}
-
-int main(){
-    init_sdl();
-
-    char_constructor();
-
-    init_modules();
-
-    define_coordinates();
-
-    load_characters();
-
-    menu_start();
-
-    HERO.time = 350;
-
-    HERO.life = 3;
-
-    //SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0xFF, 0xFF, 0xFF ) );
-
-    SDL_Surface* mensagem = TTF_RenderText_Solid(font, "Teste do texto", menu_game_main);
-
     int quit = true;
 
-    fase1 = IMG_Load("fase1.png");
-    bomb_sprites = IMG_Load("Sprites/bomb.png");
+    HERO.life = 3;
+    HERO.points = 0;
 
-    ins_object(HERO.x, HERO.y, map_characters, screen, &HERO.front_clip[1]);
-
-    Mix_ResumeMusic();
-
-    while(quit == true){
+    while(quit){
         start();
+
+        fase1 = IMG_Load("fase1.png");
+        bomb_sprites = IMG_Load("Sprites/bomb.png");
+
+        ins_object(HERO.x, HERO.y, map_characters, screen, &HERO.front_clip[1]);
 
         while(SDL_PollEvent(&event)){
             event_keyboard_handle();
@@ -572,21 +571,20 @@ int main(){
                 quit = false;
             }
         }
-        
+
         move_actor();
 
         SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 62, 101, 91 ) );
 
         ins_object(0, 30, fase1, screen, null);
 
-        //ins_object(5, 5, mensagem, screen, null);
         life_game();
 
         sum_point();
 
         game_time();
 
-        its_gameover();
+        quit = its_gameover();
 
         if(BOMB.bombStatus == true){
             ins_object(BOMB.x, BOMB.y, bomb_sprites, screen, &BOMB.bomb_img[0]);
@@ -605,6 +603,34 @@ int main(){
 
         if(get_ticks() < 1000 / _FPS){
             SDL_Delay( ( 1000 / _FPS ) - get_ticks() );
+        }
+    }
+
+    game_over();
+}
+
+int main(){
+    init_sdl();
+
+    char_constructor();
+
+    init_modules();
+
+    define_coordinates();
+
+    load_characters();
+
+    int quit = true;
+
+    while(quit == true){
+        int option = menu_start();
+
+        if(option == 0){
+            game_start();
+        } else if (option == 1){
+            instrucoes();
+        } else if(option == 2){
+            quit = false;
         }
     }
 
