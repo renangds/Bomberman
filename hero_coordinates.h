@@ -9,12 +9,18 @@ static struct hero{
     int y;
     int frames;
     int status;
+    int life;
+    int points;
+    int time;
 } HERO;
 
 static struct bomb{
     SDL_Rect bomb_img[9];
     SDL_Rect explosion[10];
     int timeStart;
+    int bombStatus;
+    int x;
+    int y;
 } BOMB;
 
 static struct enemy1_coordinates{
