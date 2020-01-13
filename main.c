@@ -14,68 +14,67 @@ const int _FPS = 22;
 #define SAIR 2
 
 void define_coordinates(){
-    HERO.front_clip[0].x = 195;
-    HERO.front_clip[0].y = 4;
-    HERO.front_clip[0].h = 44;
-    HERO.front_clip[0].w = 27;
+    HERO.front_clip[0].x = 145;
+    HERO.front_clip[0].y = 1;
+    HERO.front_clip[0].h = 47;
+    HERO.front_clip[0].w = 45;
 
-    HERO.front_clip[1].x = 226;
-    HERO.front_clip[1].y = 3;
-    HERO.front_clip[1].h = 44;
-    HERO.front_clip[1].w = 29;
+    HERO.front_clip[1].x = 193;
+    HERO.front_clip[1].y = 0;
+    HERO.front_clip[1].h = 48;
+    HERO.front_clip[1].w = 45;
 
-    HERO.front_clip[2].x = 259;
-    HERO.front_clip[2].y = 3;
-    HERO.front_clip[2].h = 44;
-    HERO.front_clip[2].w = 27;
-
-
-    HERO.behind_clip[0].x = 194;
-    HERO.behind_clip[0].y = 148;
-    HERO.behind_clip[0].h = 44;
-    HERO.behind_clip[0].w = 28;
-
-    HERO.behind_clip[1].x = 226;
-    HERO.behind_clip[1].y = 147;
-    HERO.behind_clip[1].h = 44;
-    HERO.behind_clip[1].w = 29;
-
-    HERO.behind_clip[2].x = 258;
-    HERO.behind_clip[2].y = 148;
-    HERO.behind_clip[2].h = 44;
-    HERO.behind_clip[2].w = 29;
+    HERO.front_clip[2].x = 241;
+    HERO.front_clip[2].y = 1;
+    HERO.front_clip[2].h = 47;
+    HERO.front_clip[2].w = 45;
 
 
-    HERO.left_clip[0].x = 197;
-    HERO.left_clip[0].y = 52;
-    HERO.left_clip[0].h = 43;
-    HERO.left_clip[0].w = 23;
+    HERO.behind_clip[0].x = 146;
+    HERO.behind_clip[0].y = 145;
+    HERO.behind_clip[0].h = 47;
+    HERO.behind_clip[0].w = 43;
 
-    HERO.left_clip[1].x = 229;
-    HERO.left_clip[1].y = 51;
-    HERO.left_clip[1].h = 44;
-    HERO.left_clip[1].w = 23;
+    HERO.behind_clip[1].x = 194;
+    HERO.behind_clip[1].y = 144;
+    HERO.behind_clip[1].h = 48;
+    HERO.behind_clip[1].w = 43;
 
-    HERO.left_clip[2].x = 261;
-    HERO.left_clip[2].y = 51;
-    HERO.left_clip[2].h = 44;
-    HERO.left_clip[2].w = 23;
+    HERO.behind_clip[2].x = 242;
+    HERO.behind_clip[2].y = 145;
+    HERO.behind_clip[2].h = 47;
+    HERO.behind_clip[2].w = 43;
 
+    
+    HERO.left_clip[0].x = 146;
+    HERO.left_clip[0].y = 49;
+    HERO.left_clip[0].h = 47;
+    HERO.left_clip[0].w = 43;
 
-    HERO.right_clip[0].x = 196;
-    HERO.right_clip[0].y = 100;
-    HERO.right_clip[0].h = 43;
-    HERO.right_clip[0].w = 23;
+    HERO.left_clip[1].x = 194;
+    HERO.left_clip[1].y = 48;
+    HERO.left_clip[1].h = 48;
+    HERO.left_clip[1].w = 43;
 
-    HERO.right_clip[1].x = 228;
-    HERO.right_clip[1].y = 99;
-    HERO.right_clip[1].h = 44;
-    HERO.right_clip[1].w = 23;
+    HERO.left_clip[2].x = 242;
+    HERO.left_clip[2].y = 49;
+    HERO.left_clip[2].h = 47;
+    HERO.left_clip[2].w = 43;
 
-    HERO.right_clip[2].x = 260;
-    HERO.right_clip[2].y = 100;
-    HERO.right_clip[2].h = 43;
-    HERO.right_clip[2].w = 23;
+    HERO.right_clip[0].x = 146;
+    HERO.right_clip[0].y = 97;
+    HERO.right_clip[0].h = 47;
+    HERO.right_clip[0].w = 43;
+
+    HERO.right_clip[1].x = 194;
+    HERO.right_clip[1].y = 96;
+    HERO.right_clip[1].h = 48;
+    HERO.right_clip[1].w = 43;
+
+    HERO.right_clip[2].x = 242;
+    HERO.right_clip[2].y = 97;
+    HERO.right_clip[2].h = 47;
+    HERO.right_clip[2].w = 43;
 
     //Bomba
 
@@ -176,7 +175,7 @@ void unpause(){
 }
 
 SDL_Surface* load_image(){
-    SDL_Surface* loadedImage = IMG_Load("hero.png");
+    SDL_Surface* loadedImage = IMG_Load("Sprites/kono_hero.jpg");
 
     if(!loadedImage) exit(1);
 
@@ -196,7 +195,7 @@ void init_modules(){
 
     if(!screen) exit(1);
 
-    SDL_WM_SetCaption("Zeldavania", null);
+    SDL_WM_SetCaption("BomberSuba! Megumin's Last Explosion!", null);
 
     if(TTF_Init() == -1) exit(1);
 
@@ -204,11 +203,17 @@ void init_modules(){
 
     if(font == null) exit(1); 
 
+    kono_font = TTF_OpenFont("Fonte/grobold.ttf", 28);
+
+    if(font == null) exit(1);
+
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) exit(1);
 
-    drop_bomb = Mix_LoadWAV("Musica/all_sound.wav");
+    drop_bomb = Mix_LoadWAV("Musica/megumin_explosion.wav");
 
-    main_music = Mix_LoadMUS("Musica/musica_jogo.mp3");
+    main_music = Mix_LoadMUS("Musica/stage1.mp3");
+
+    music_menu = Mix_LoadMUS("Musica/intro_music.mp3");
 }
 
 void ins_object(int x, int y, SDL_Surface* sour, SDL_Surface* dest, SDL_Surface* clip){
@@ -227,7 +232,7 @@ void end_sdl(){
 }
 
 void instrucoes(){
-    SDL_Surface* telaInstrucao = IMG_Load("Intro/kawaii.jpg");
+    SDL_Surface* telaInstrucao = IMG_Load("Intro/kono_instrucoes.png");
 
     if(!telaInstrucao) exit(1);
 
@@ -267,7 +272,7 @@ void menu_start(){
     int option = 0;
     int quit = true;
 
-    SDL_Surface* telaIntro = IMG_Load("Intro/intro.jpg");
+    SDL_Surface* telaIntro = IMG_Load("Intro/kono_intro.png");
 
     sound_menu = Mix_LoadWAV("Musica/blip_select.wav");
 
@@ -275,15 +280,15 @@ void menu_start(){
         exit(1);
     }
 
-    SDL_Surface* startGame = TTF_RenderText_Solid(font, "Bombardear", color_main);
-    SDL_Surface* instructions = TTF_RenderText_Solid(font, "Intrucoes", color_main);
-    SDL_Surface* exitGame = TTF_RenderText_Solid(font, "Meter o pe", color_main);
+    SDL_Surface* startGame = TTF_RenderText_Solid(kono_font, "Explosion!", color_main);
+    SDL_Surface* instructions = TTF_RenderText_Solid(kono_font, "Intrucoes", color_main);
+    SDL_Surface* exitGame = TTF_RenderText_Solid(kono_font, "Sair", color_main);
 
     if(!startGame || !instructions || !exitGame ) exit(1);
 
-    ins_object(259, 369, startGame, screen, null);
-    ins_object(259, 421, instructions, screen, null);
-    ins_object(259, 472, exitGame, screen, null);
+    ins_object(78, 286, startGame, screen, null);
+    ins_object(78, 319, instructions, screen, null);
+    ins_object(78, 355, exitGame, screen, null);
 
     while(quit == true){
         start();
@@ -292,6 +297,10 @@ void menu_start(){
             if(event.type == SDL_Quit){
                 quit = false;
             }
+        }
+
+        if(Mix_PlayingMusic() == 0){
+            Mix_PlayMusic(music_menu, -1);
         }
 
         Uint8* keystates = SDL_GetKeyState(NULL);
@@ -316,27 +325,27 @@ void menu_start(){
 
         switch(option){
             case 0:
-                exitGame = TTF_RenderText_Solid(font, "Meter o pe", color_main);
-                instructions = TTF_RenderText_Solid(font, "Intrucoes", color_main);
-                startGame = TTF_RenderText_Solid(font, "Bombardear", selected);
+                startGame = TTF_RenderText_Solid(kono_font, "Explosion!", color_menu1);
+                instructions = TTF_RenderText_Solid(kono_font, "Intrucoes", menu_unselected);
+                exitGame = TTF_RenderText_Solid(kono_font, "Sair", menu_unselected);
                 break;
             case 1:
-                exitGame = TTF_RenderText_Solid(font, "Meter o pe", color_main);
-                startGame = TTF_RenderText_Solid(font, "Bombardear", color_main);
-                instructions = TTF_RenderText_Solid(font, "Intrucoes", selected);
+                startGame = TTF_RenderText_Solid(kono_font, "Explosion!", menu_unselected);
+                instructions = TTF_RenderText_Solid(kono_font, "Intrucoes", color_menu2);
+                exitGame = TTF_RenderText_Solid(kono_font, "Sair", menu_unselected);    
                 break;
             case 2:
-                startGame = TTF_RenderText_Solid(font, "Bombardear", color_main);
-                instructions = TTF_RenderText_Solid(font, "Intrucoes", color_main);
-                exitGame = TTF_RenderText_Solid(font, "Meter o pe", selected);
+                startGame = TTF_RenderText_Solid(kono_font, "Explosion!", menu_unselected);
+                instructions = TTF_RenderText_Solid(kono_font, "Intrucoes", menu_unselected);
+                exitGame = TTF_RenderText_Solid(kono_font, "Sair", color_menu3);
                 break;
         }
 
         ins_object(0, 0, telaIntro, screen, null);
 
-        ins_object(259, 369, startGame, screen, null);
-        ins_object(259, 421, instructions, screen, null);
-        ins_object(259, 472, exitGame, screen, null);
+        ins_object(78, 286, startGame, screen, null);
+        ins_object(78, 319, instructions, screen, null);
+        ins_object(78, 355, exitGame, screen, null);
 
         if( SDL_Flip( screen ) == -1 )
         {
@@ -348,6 +357,9 @@ void menu_start(){
         }
     }
 
+
+    Mix_PauseMusic();
+
     SDL_free(startGame);
     SDL_free(instructions);
     SDL_free(exitGame);
@@ -358,17 +370,25 @@ void menu_start(){
 }
 
 void game_over(){
-    char msg[10] = "Game Over";
+    Mix_PauseMusic();
 
     int quit = true;
 
-    while(quit){
-        
-    }
+    SDL_Surface* img = IMG_Load("Intro/megumin_gameover.png");
+
+    ins_object(0, 0, img, screen, null);
+
+    if(SDL_Flip(screen) == -1) exit(1);
+
+    SDL_Delay(5000);
+
+    SDL_free(img);
+
+    menu_start();
 }
 
 void its_gameover(){
-    if(!HERO.life || !HERO.time){
+    if(HERO.life == 0){
         game_over();
     }
 }
@@ -419,7 +439,7 @@ void event_keyboard_handle(){
             case SDLK_LEFT: HERO.xVel -= 5; HERO.status = LEFT; break;
             case SDLK_RIGHT: HERO.xVel += 5; HERO.status = RIGHT; break;
             case SDLK_SPACE: bomb_handle(); break;
-            case SDLK_F10: HERO.life = 1; break;
+            case SDLK_F10: HERO.life -= 1; break;
             case SDLK_F11: HERO.points += 10; break;
         }
     } else if (event.type == SDL_KEYUP){
@@ -504,6 +524,10 @@ void char_constructor(){
     HERO.status = DOWN;
 }
 
+void game_start(){
+    
+}
+
 int main(){
     init_sdl();
 
@@ -532,6 +556,8 @@ int main(){
 
     ins_object(HERO.x, HERO.y, map_characters, screen, &HERO.front_clip[1]);
 
+    Mix_ResumeMusic();
+
     while(quit == true){
         start();
 
@@ -555,6 +581,8 @@ int main(){
         sum_point();
 
         game_time();
+
+        its_gameover();
 
         if(BOMB.bombStatus == true){
             ins_object(BOMB.x, BOMB.y, bomb_sprites, screen, &BOMB.bomb_img[0]);
