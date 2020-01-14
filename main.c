@@ -143,6 +143,8 @@ void define_coordinates(){
     HERO.heart_clip[1].y = 0;
     HERO.heart_clip[1].h = 42;
     HERO.heart_clip[1].w = 42;
+
+    //Frog Clips
 }
 
 void start(){
@@ -390,11 +392,6 @@ int menu_start(){
     SDL_free(exitGame);
     SDL_free(records);
     SDL_free(telaIntro);
-
-    /*
-    if(option == 1) instrucoes();
-    if(option == 2) exit(1);
-    */
 
    return option;
 }
@@ -660,11 +657,11 @@ void game_start(){
     HERO.points = 0;
     HERO.time = 300;
 
+    fase1 = IMG_Load("fase1.png");
+    bomb_sprites = IMG_Load("Sprites/bomb.png");
+
     while(quit){
         start();
-
-        fase1 = IMG_Load("fase1.png");
-        bomb_sprites = IMG_Load("Sprites/bomb.png");
 
         ins_object(HERO.x, HERO.y, map_characters, screen, &HERO.front_clip[1]);
 
