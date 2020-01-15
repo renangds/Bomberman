@@ -266,10 +266,6 @@ void init_sdl(){
 }
 
 init_fonts(){
-    font = TTF_OpenFont("gameboy.ttf", 18); 
-
-    if(font == null) exit(1); 
-
     kono_font = TTF_OpenFont("Fonte/grobold.ttf", 28);
 
     if(kono_font == null) exit(1);
@@ -300,7 +296,6 @@ init_mixes(){
 }
 
 void close_fonts(){
-    TTF_CloseFont(font);
     TTF_CloseFont(kono_font);
     TTF_CloseFont(kono_gui);
 }
@@ -648,18 +643,6 @@ void sum_point(){
 }
 
 void life_game(){
-    /*
-    char life[2];
-
-    sprintf(life, "%d", HERO.life);
-
-    char vida[50] = "Vida: ";
-
-    life_gui = TTF_RenderText_Solid(font, strcat(vida, life), menu_game_main);
-
-    ins_object(5, 5, life_gui, screen, null);
-    */
-
    int realLife = 3 - HERO.life;
 
    for(int i = 0; i < HERO.life; i++){

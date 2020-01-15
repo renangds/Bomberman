@@ -33,8 +33,6 @@ SDL_Surface* points_gui;
 
 SDL_Surface* fase1;
 
-TTF_Font* font = null;
-
 TTF_Font* gameOver = null;
 
 TTF_Font* kono_font = null;
