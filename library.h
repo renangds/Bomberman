@@ -5,6 +5,7 @@
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
 #include <string.h>
+#include <time.h>   
 
 #define null NULL
 #define true 1
@@ -22,6 +23,9 @@ SDL_Surface* map_characters;
 SDL_Surface* bomb_sprites;
 SDL_Surface* frog_sprite;
 SDL_Surface* objects_sprites;
+SDL_Surface* clock_sprite;
+SDL_Surface* heart_sprite;
+SDL_Surface* objects;
 
 SDL_Surface* life_gui;
 SDL_Surface* time_gui;
@@ -34,6 +38,8 @@ TTF_Font* font = null;
 TTF_Font* gameOver = null;
 
 TTF_Font* kono_font = null;
+
+TTF_Font* kono_gui = null;
 
 SDL_Color color_main = {0, 0, 0};
 SDL_Color selected = {0, 0, 255};

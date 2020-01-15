@@ -78,10 +78,10 @@ void define_coordinates(){
 
     //Bomba
 
-    BOMB.bomb_img[0].x = 9;
-    BOMB.bomb_img[0].y = 435;
-    BOMB.bomb_img[0].h = 23;
-    BOMB.bomb_img[0].w = 18;
+    BOMB.bomb_img[0].x = 6;
+    BOMB.bomb_img[0].y = 76;
+    BOMB.bomb_img[0].h = 40;
+    BOMB.bomb_img[0].w = 32;
 
 
     BOMB.bomb_img[1].x = 5;
@@ -145,6 +145,69 @@ void define_coordinates(){
     HERO.heart_clip[1].w = 42;
 
     //Frog Clips
+
+    ENEMY1.front_clip[0].x = 57;
+    ENEMY1.front_clip[0].y = 15;
+    ENEMY1.front_clip[0].h = 30;
+    ENEMY1.front_clip[0].w = 30;
+
+    ENEMY1.front_clip[1].x = 6;
+    ENEMY1.front_clip[1].y = 8;
+    ENEMY1.front_clip[1].h = 37;
+    ENEMY1.front_clip[1].w = 36;
+
+    ENEMY1.front_clip[2].x = 102;
+    ENEMY1.front_clip[2].y = 8;
+    ENEMY1.front_clip[2].h = 37;
+    ENEMY1.front_clip[2].w = 36;
+
+
+    ENEMY1.left_clip[0].x = 53;
+    ENEMY1.left_clip[0].y = 70;
+    ENEMY1.left_clip[0].h = 24;
+    ENEMY1.left_clip[0].w = 33;
+
+    ENEMY1.left_clip[1].x = 0;
+    ENEMY1.left_clip[1].y = 62;
+    ENEMY1.left_clip[1].h = 32;
+    ENEMY1.left_clip[1].w = 47;
+
+    ENEMY1.left_clip[2].x = 96;
+    ENEMY1.left_clip[2].y = 62;
+    ENEMY1.left_clip[2].h = 32;
+    ENEMY1.left_clip[2].w = 47;
+
+
+    ENEMY1.right_clip[0].x = 58;
+    ENEMY1.right_clip[0].y = 118;
+    ENEMY1.right_clip[0].h = 24;
+    ENEMY1.right_clip[0].w = 33;
+
+    ENEMY1.right_clip[1].x = 1;
+    ENEMY1.right_clip[1].y = 110;
+    ENEMY1.right_clip[1].h = 33;
+    ENEMY1.right_clip[1].w = 47;
+
+    ENEMY1.right_clip[2].x = 97;
+    ENEMY1.right_clip[2].y = 110;
+    ENEMY1.right_clip[2].h = 32;
+    ENEMY1.right_clip[2].w = 47;
+
+
+    ENEMY1.behind_clip[0].x = 54;
+    ENEMY1.behind_clip[0].y = 159;
+    ENEMY1.behind_clip[0].h = 29;
+    ENEMY1.behind_clip[0].w = 38;
+
+    ENEMY1.behind_clip[1].x = 6;
+    ENEMY1.behind_clip[1].y = 148;
+    ENEMY1.behind_clip[1].h = 45;
+    ENEMY1.behind_clip[1].w = 32;
+
+    ENEMY1.behind_clip[2].x = 102;
+    ENEMY1.behind_clip[2].y = 148;
+    ENEMY1.behind_clip[2].h = 44;
+    ENEMY1.behind_clip[2].w = 32;
 }
 
 void start(){
@@ -188,41 +251,43 @@ void unpause(){
     }
 }
 
-SDL_Surface* load_image(){
-    SDL_Surface* loadedImage = IMG_Load("Sprites/kono_hero.jpg");
-
-    if(!loadedImage) exit(1);
-
-    return loadedImage;
-}
-
-void load_characters(){
-    map_characters = load_image();
-}
-
 void init_sdl(){
     if(SDL_Init(SDL_INIT_EVERYTHING) == -1) exit(1);
-}           
 
-void init_modules(){
+    if(TTF_Init() == -1) exit(1);
+
+    if(Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) exit(1);
+
     screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
 
     if(!screen) exit(1);
 
     SDL_WM_SetCaption("BomberSuba! Megumin's Last Explosion!", null);
+}
 
-    if(TTF_Init() == -1) exit(1);
-
+init_fonts(){
     font = TTF_OpenFont("gameboy.ttf", 18); 
 
     if(font == null) exit(1); 
 
     kono_font = TTF_OpenFont("Fonte/grobold.ttf", 28);
 
-    if(font == null) exit(1);
+    if(kono_font == null) exit(1);
 
-    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) exit(1);
+    kono_gui = TTF_OpenFont("Fonte/grobold.ttf", 34);
 
+    if(!kono_gui) exit(1);
+}
+
+init_images(){
+    heart_sprite = IMG_Load("Sprites/heart_med.png");
+
+    map_characters = IMG_Load("Sprites/kono_hero.jpg");
+
+    if(!heart_sprite || !map_characters) exit(1);
+}
+
+init_mixes(){
     drop_bomb = Mix_LoadWAV("Musica/megumin_explosion.wav");
 
     main_music = Mix_LoadMUS("Musica/stage1.mp3");
@@ -230,6 +295,39 @@ void init_modules(){
     music_menu = Mix_LoadMUS("Musica/intro_music.mp3");
 
     bomb_explosion = Mix_LoadWAV("Musica/boom.wav");
+
+    if(!drop_bomb || !main_music || !music_menu || !bomb_explosion) exit(1);
+}
+
+void close_fonts(){
+    TTF_CloseFont(font);
+    TTF_CloseFont(kono_font);
+    TTF_CloseFont(kono_gui);
+}
+
+void close_images(){
+    SDL_FreeSurface(heart_sprite);
+    SDL_FreeSurface(map_characters);
+}
+
+void close_mixes(){
+    Mix_FreeMusic(main_music);
+    Mix_FreeChunk(bomb_explosion);
+    Mix_FreeChunk(drop_bomb);
+}
+
+void init_modules(){
+    init_fonts();
+    init_mixes();
+    init_images();
+}
+
+void end_sdl(){
+    close_images();
+    close_mixes();
+    close_fonts();
+
+    SDL_Quit();
 }
 
 void ins_object(int x, int y, SDL_Surface* sour, SDL_Surface* dest, SDL_Surface* clip){
@@ -239,12 +337,6 @@ void ins_object(int x, int y, SDL_Surface* sour, SDL_Surface* dest, SDL_Surface*
     offset.y = y;
 
     SDL_BlitSurface(sour, clip, dest, &offset);
-}
-
-void end_sdl(){
-    SDL_FreeSurface(map_characters);
-
-    SDL_Quit();
 }
 
 void instrucoes(){
@@ -502,7 +594,7 @@ void game_over(){
 
     int quit = true;
 
-    SDL_Surface* img = IMG_Load("Intro/megumin_gameover.png");
+    SDL_Surface* img = IMG_Load("Intro/megumin_gameover_2.png");
 
     ins_object(0, 0, img, screen, null);
 
@@ -530,11 +622,19 @@ void game_time(){
 
     sprintf(time, "%d", realTime);
 
-    char tempo[50] = "Tempo: ";
+    
 
-    time_gui = TTF_RenderText_Solid(font, strcat(tempo, time), menu_game_main);
+    if(realTime > 200){
+        time_gui = TTF_RenderText_Solid(kono_gui, time, color_menu3);
+    } else if (realTime > 100){
+        time_gui = TTF_RenderText_Solid(kono_gui, time, color_menu2);
+    } else{
+        time_gui = TTF_RenderText_Solid(kono_gui, time, color_menu1);
+    }
 
-    ins_object(182, 5, time_gui, screen, null);
+    ins_object(370, 15, time_gui, screen, null);
+
+    ins_object(312, 5, clock_sprite, screen, null);
 }
 
 void sum_point(){
@@ -542,14 +642,13 @@ void sum_point(){
 
     sprintf(point, "%d", HERO.points);
 
-    char ponto[50] = "Pontos: ";
+    points_gui = TTF_RenderText_Solid(kono_gui, point, color_menu2);
 
-    points_gui = TTF_RenderText_Solid(font, strcat(ponto, point), menu_game_main);
-
-    ins_object(452, 5, points_gui, screen, null);
+    ins_object(500, 17, points_gui, screen, null);
 }
 
 void life_game(){
+    /*
     char life[2];
 
     sprintf(life, "%d", HERO.life);
@@ -559,6 +658,13 @@ void life_game(){
     life_gui = TTF_RenderText_Solid(font, strcat(vida, life), menu_game_main);
 
     ins_object(5, 5, life_gui, screen, null);
+    */
+
+   int realLife = 3 - HERO.life;
+
+   for(int i = 0; i < HERO.life; i++){
+       ins_object(30 + (i*HERO.heart_clip[0].w), 10, heart_sprite, screen, &HERO.heart_clip[0]);
+   }
 }
 
 void event_keyboard_handle(){
@@ -587,8 +693,8 @@ void event_keyboard_handle(){
 void bomb_handle(){
     if(BOMB.bombStatus == false){
         Mix_PlayChannel( -1, drop_bomb, 0 );
-        BOMB.x = HERO.x;
-        BOMB.y = HERO.y;
+        BOMB.x = HERO.table_x * 33;
+        BOMB.y = HERO.table_y * 33;
         ins_object(BOMB.x, BOMB.y, bomb_sprites, screen, &BOMB.bomb_img[0]);
         BOMB.bombStatus = true;
         BOMB.timeStart = SDL_GetTicks()/1000;
@@ -642,6 +748,78 @@ void insert_actor(){
 
 }
 
+void show_coordinate(){
+    char x[10];
+    char y[10];
+
+    sprintf(x, "%d ", HERO.x);
+    sprintf(y, "%d ", HERO.y);
+
+    SDL_Surface* coord = TTF_RenderText_Solid(kono_font, strcat(x, y), color_menu1);
+
+    ins_object(100, 100, coord, screen, null);
+
+    char xt[10];
+    char yt[10];
+
+    HERO.table_x = (HERO.x/33)+1;
+    HERO.table_y = (HERO.y/33)+1;
+
+    printf("%d %d\n", HERO.table_x, HERO.table_y);
+
+    sprintf(xt, "%d ", ((HERO.x)/31));
+    sprintf(yt, "%d ", ((HERO.y)/31));
+
+    SDL_Surface* coordTab = TTF_RenderText_Solid(kono_font, strcat(xt, yt), color_menu1);
+
+    ins_object(100, 200, coordTab, screen, null);
+}
+
+void insert_enemy(enemy* e, SDL_Surface* image){
+    ins_object(e->x, e->y, frog_sprite, screen, image);
+}
+
+void move_frog(enemy* e){
+        int direction = rand()%4;
+
+        switch(direction){
+            case 0:
+                e->x = e->x;
+                e->y -= 2;
+                insert_enemy(e, &ENEMY1.behind_clip[1]);
+                break;
+            case 1:
+                e->x = e->x;
+                e->y = e->y + 2;
+                insert_enemy(e, &ENEMY1.front_clip[1]);
+                break;
+            case 2:
+                e->x = e->x -1;
+                e->y = e->y;
+                insert_enemy(e, &ENEMY1.left_clip[1]);
+                break;
+            case 3:
+                e->x = e->x;
+                e->y = e->y + 1;
+                insert_enemy(e, &ENEMY1.right_clip[1]);
+                break;
+        }
+}
+
+void move_enemies(enemy* e){
+
+    switch(e->enemyClass){
+        case 0:
+            move_frog(e);
+    }
+}
+
+enemy* enemies_stage(){
+    enemy enemies[10];
+
+    return enemies;
+}
+
 void char_constructor(){
     HERO.xVel = 0;
     HERO.yVel = 0;
@@ -657,8 +835,16 @@ void game_start(){
     HERO.points = 0;
     HERO.time = 300;
 
-    fase1 = IMG_Load("fase1.png");
+    fase1 = IMG_Load("Mapas/fase1_new_remod.png");
     bomb_sprites = IMG_Load("Sprites/bomb.png");
+    frog_sprite = IMG_Load("Sprites/frog.png");
+    clock_sprite = IMG_Load("Sprites/clock.png");
+
+    enemy e1;
+
+    e1.x = 200;
+    e1.y = 300;
+    e1.enemyClass = 0;
 
     while(quit){
         start();
@@ -677,13 +863,19 @@ void game_start(){
 
         SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 62, 101, 91 ) );
 
-        ins_object(0, 30, fase1, screen, null);
+        ins_object(0, 61, fase1, screen, null);
+
+        //move_enemies(&e1);
+
+        //printf("%d %d", HERO.table_x, HERO.table_y);
 
         life_game();
 
         sum_point();
 
         game_time();
+
+        show_coordinate();
 
         quit = its_gameover();
 
@@ -718,8 +910,6 @@ int main(){
     init_modules();
 
     define_coordinates();
-
-    load_characters();
 
     int quit = true;
 

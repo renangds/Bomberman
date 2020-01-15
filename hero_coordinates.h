@@ -8,6 +8,8 @@ static struct hero{
     int xVel;
     int x;
     int y;
+    int table_x;
+    int table_y;
     int frames;
     int status;
     int life;
@@ -31,7 +33,11 @@ static struct enemy1_coordinates{
     SDL_Rect right_clip[3];
 } ENEMY1;
 
-struct enemy_moves{
+typedef struct enemy_moves{
     int yVel;
     int xVel;
+    int x;
+    int y;
+    int nextMove;
+    int enemyClass;
 } enemy;
