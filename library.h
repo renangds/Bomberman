@@ -55,3 +55,14 @@ Mix_Chunk* bomb_explosion = null;
 Mix_Music* main_music = null;
 
 Mix_Music* music_menu = null;
+
+const int _FPS = 22;
+
+#define LEFT 0
+#define RIGHT 1
+#define UP 2
+#define DOWN 3
+
+#define GAMESTART 0
+#define INSTRUCOES 1
+#define SAIR 2

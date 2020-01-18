@@ -33,6 +33,21 @@ static struct enemy1_coordinates{
     SDL_Rect right_clip[3];
 } ENEMY1;
 
+static struct object_image{
+    SDL_Rect destructive;
+    SDL_Rect indest;
+} IOBJ;
+
+typedef struct object{
+    int x;
+    int y;
+} OBJ;
+
+static struct explosion_animation{
+    SDL_Rect explosion[10];
+    int active;
+} EXPLOSION;
+
 typedef struct enemy_moves{
     int yVel;
     int xVel;
