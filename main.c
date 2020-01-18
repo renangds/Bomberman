@@ -44,10 +44,6 @@ void char_constructor(){
     HERO.status = DOWN;
 }
 
-void colision(OBJ* obj){
-    int bottomH = 
-}
-
 void game_start(){
     int quit = true;
 
