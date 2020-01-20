@@ -48,8 +48,36 @@ void ia_enemy_up(){
 
 }
 
+void read_map(){
+    FILE* arq;
+    char* str[2];
+
+    if((arq = fopen("Arquivos/fase1.txt", "r")) == null){
+        exit(1);
+    }
+
+    for(int i = 0; i < 13; i++){
+        for(int j = 0; j < 22; j++){
+            fscanf(arq, "%s ", str);
+            map[i][j] = atoi(str);
+        }
+    }
+
+    fclose(arq);
+}
+
+void draw_map(){
+    for(int i = 1; i < 12; i++){
+        for(int j = 0; j < 22; j++){
+            if(map[i][j] == false) ins_object((j * 34), (i * 33) + 55, objects, screen, &IOBJ.destructive);
+        }
+    }
+}
+
 void game_start(){
     int quit = true;
+
+    read_map();
 
     HERO.life = 3;
     HERO.points = 0;
@@ -94,7 +122,7 @@ void game_start(){
 
         //move_enemies(&e1);
 
-        //printf("%d %d", HERO.table_x, HERO.table_y);
+        //draw_map();
 
         life_game();
 

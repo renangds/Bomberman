@@ -18,6 +18,8 @@ static int SCREEN_WIDTH = 720;
 static int SCREEN_HEIGHT = 480;
 static int SCREEN_BPP = 32;
 
+int map[13][22];
+
 SDL_Event event;
 SDL_Surface* screen;
 SDL_Surface* map_characters;
