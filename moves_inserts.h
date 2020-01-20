@@ -30,17 +30,83 @@ void event_keyboard_handle(){
     }
 }
 
+int enemy_collisions(){
+    int leftH, rightH, bottomH, topH;
+    int leftE, rightE, bottomE, topE;
+
+    leftH = HERO.x;
+    rightH = HERO.x + HERO.right_clip[HERO.frames].w;
+    topH = HERO.y;
+    bottomH = HERO.y + HERO.behind_clip[HERO.frames].w + 4;
+
+    leftE = 200;
+    rightE = 200 + 32;
+    topE = 200;
+    bottomE = 200 + 16;
+
+    if(bottomH <= topE){
+        return false;
+    }
+
+    if(topH >= bottomE){
+        return false;
+    }
+
+    if(rightH <= leftE){
+        return false;
+    }
+
+    if(leftH >= rightE){
+        return false;
+    }
+
+    return true;
+}
+
+int enemy_kick(SDL_Rect* image, enemy* e){
+    int leftH, rightH, bottomH, topH;
+    int leftE, rightE, bottomE, topE;
+
+    leftH = HERO.x;
+    rightH = HERO.x + HERO.right_clip[HERO.frames].w;
+    topH = HERO.y;
+    bottomH = HERO.y + HERO.behind_clip[HERO.frames].w + 4;
+
+    leftE = e->x;
+    rightE = e->x + 30;
+    topE = e->y;
+    bottomE = e->y + 30;
+
+    if(bottomH <= topE){
+        return false;
+    }
+
+    if(topH >= bottomE){
+        return false;
+    }
+
+    if(rightH <= leftE){
+        return false;
+    }
+
+    if(leftH >= rightE){
+        return false;
+    }
+
+    return true;
+}
+
 void move_actor(){
     HERO.x += HERO.xVel;
 
-    if( ( HERO.x < 0 ) || ( HERO.x + 32 > SCREEN_WIDTH ) )
+    if( ( HERO.x < 0 ) || ( HERO.x + 32 > SCREEN_WIDTH ) || enemy_collisions() )
     {
         HERO.x -= HERO.xVel;
     }
 
     HERO.y += HERO.yVel;
 
-    if( ( HERO.y < 0 ) || ( HERO.y + 32 > SCREEN_HEIGHT ) )
+    if( ( HERO.y < 0 ) || ( HERO.y + 32 > SCREEN_HEIGHT ) || enemy_collisions() )
     {
         HERO.y -= HERO.yVel;
     }
@@ -81,27 +147,32 @@ void move_frog(enemy* e){
                 e->x = e->x;
                 e->y -= 2;
                 insert_enemy(e, &ENEMY1.behind_clip[1]);
+                if(enemy_kick(&ENEMY1.behind_clip[1], e)) HERO.life -= 1;
                 break;
             case 1:
                 e->x = e->x;
                 e->y = e->y + 2;
                 insert_enemy(e, &ENEMY1.front_clip[1]);
+                if(enemy_kick(&ENEMY1.front_clip[1], e)) HERO.life -= 1;
                 break;
             case 2:
                 e->x = e->x -1;
                 e->y = e->y;
                 insert_enemy(e, &ENEMY1.left_clip[1]);
+                if(enemy_kick(&ENEMY1.left_clip[1], e)) HERO.life -= 1;
                 break;
             case 3:
                 e->x = e->x;
                 e->y = e->y + 1;
                 insert_enemy(e, &ENEMY1.right_clip[1]);
+                if(enemy_kick(&ENEMY1.right_clip[1], e)) HERO.life -= 1;
                 break;
         }
+
+        
 }
 
 void move_enemies(enemy* e){
-
     switch(e->enemyClass){
         case 0:
             move_frog(e);

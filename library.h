@@ -12,7 +12,7 @@
 #define false 0
 
 #define BOMB_DEFAULT 2
-#define EXPLOSION_DEFAULT 2
+#define EXPLOSION_DEFAULT 1
 
 static int SCREEN_WIDTH = 720;
 static int SCREEN_HEIGHT = 480;

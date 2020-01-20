@@ -23,13 +23,13 @@ void show_coordinate(){
     char xt[10];
     char yt[10];
 
-    HERO.table_x = (HERO.x/33);
-    HERO.table_y = (HERO.y/34);
+    HERO.table_x = (HERO.x+23)/33;
+    HERO.table_y = (HERO.y+25)/34;
 
     //printf("%d %d\n", HERO.table_x, HERO.table_y);
 
-    sprintf(xt, "%d ", ((HERO.x)/33));
-    sprintf(yt, "%d ", ((HERO.y)/34));
+    sprintf(xt, "%d ", ((HERO.x+23)/33));
+    sprintf(yt, "%d ", ((HERO.y+25)/34));
 
     SDL_Surface* coordTab = TTF_RenderText_Solid(kono_font, strcat(xt, yt), color_menu1);
 
@@ -42,6 +42,10 @@ void char_constructor(){
     HERO.x = 162;
     HERO.y = 110;
     HERO.status = DOWN;
+}
+
+void ia_enemy_up(){
+
 }
 
 void game_start(){
