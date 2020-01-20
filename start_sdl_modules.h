@@ -29,6 +29,8 @@ init_images(){
 
     map_characters = IMG_Load("Sprites/kono_hero.jpg");
 
+    explosion_sprite = IMG_Load("Sprites/explosoes.png");
+
     if(!heart_sprite || !map_characters) exit(1);
 }
 

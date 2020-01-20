@@ -24,6 +24,7 @@ static struct bomb{
     int bombStatus;
     int x;
     int y;
+    int frames;
 } BOMB;
 
 static struct enemy1_coordinates{
@@ -44,8 +45,17 @@ typedef struct object{
 } OBJ;
 
 static struct explosion_animation{
-    SDL_Rect explosion[10];
+    SDL_Rect explosion_up[4];
+    SDL_Rect explosion_down[4];
+    SDL_Rect explosion_left[4];
+    SDL_Rect explosion_right[4];
+    SDL_Rect explosion_center;
     int active;
+    int status;
+    int frames;
+    int x;
+    int y;
+    int timeStart;
 } EXPLOSION;
 
 typedef struct enemy_moves{

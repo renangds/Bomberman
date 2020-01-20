@@ -12,6 +12,7 @@
 #define false 0
 
 #define BOMB_DEFAULT 2
+#define EXPLOSION_DEFAULT 2
 
 static int SCREEN_WIDTH = 720;
 static int SCREEN_HEIGHT = 480;
@@ -26,6 +27,7 @@ SDL_Surface* objects_sprites;
 SDL_Surface* clock_sprite;
 SDL_Surface* heart_sprite;
 SDL_Surface* objects;
+SDL_Surface* explosion_sprite;
 
 SDL_Surface* life_gui;
 SDL_Surface* time_gui;

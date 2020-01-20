@@ -103,8 +103,12 @@ void game_start(){
         quit = its_gameover();
 
         if(BOMB.bombStatus == true){
-            ins_object(BOMB.x, BOMB.y, bomb_sprites, screen, &BOMB.bomb_img[0]);
+            //ins_object(BOMB.x, BOMB.y, bomb_sprites, screen, &BOMB.bomb_img[0]);
             bomb_timer();
+        }
+
+        if(EXPLOSION.status == true){
+            explosion_animation();
         }
 
         insert_actor();
