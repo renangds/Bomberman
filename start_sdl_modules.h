@@ -31,6 +31,8 @@ init_images(){
 
     explosion_sprite = IMG_Load("Sprites/explosoes.png");
 
+    portal = IMG_Load("Sprites/portal.png");
+
     if(!heart_sprite || !map_characters) exit(1);
 }
 

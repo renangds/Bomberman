@@ -71,8 +71,8 @@ void define_coordinates(){
 
     BOMB.bomb_img[1].x = 0;
     BOMB.bomb_img[1].y = 12;
-    BOMB.bomb_img[1].h = 37;
-    BOMB.bomb_img[1].w = 31;
+    BOMB.bomb_img[1].h = 42;
+    BOMB.bomb_img[1].w = 38;
 
 
     BOMB.bomb_img[2].x = 34;
@@ -274,4 +274,21 @@ void define_coordinates(){
     EXPLOSION.explosion_center.y = 107;
     EXPLOSION.explosion_center.h = 35;
     EXPLOSION.explosion_center.w = 40;
+
+    //Portal
+
+    PORTAL.portal_animation[0].x = 150;
+    PORTAL.portal_animation[0].y = 295;
+    PORTAL.portal_animation[0].h = 40;
+    PORTAL.portal_animation[0].w = 36;
+
+    PORTAL.portal_animation[1].x = 198;
+    PORTAL.portal_animation[1].y = 295;
+    PORTAL.portal_animation[1].h = 40;
+    PORTAL.portal_animation[1].w = 36;
+
+    PORTAL.portal_animation[2].x = 246;
+    PORTAL.portal_animation[2].y = 295;
+    PORTAL.portal_animation[2].h = 40;
+    PORTAL.portal_animation[2].w = 36;
 }

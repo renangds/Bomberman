@@ -9,6 +9,7 @@
 #include "bomb.h"
 #include "moves_inserts.h"
 
+/*
 void show_coordinate(){
     char x[10];
     char y[10];
@@ -23,8 +24,8 @@ void show_coordinate(){
     char xt[10];
     char yt[10];
 
-    HERO.table_x = (HERO.x+23)/33;
-    HERO.table_y = (HERO.y+25)/34;
+    //HERO.table_x = (HERO.x+23)/33;
+    //HERO.table_y = (HERO.y+25)/34;
 
     //printf("%d %d\n", HERO.table_x, HERO.table_y);
 
@@ -35,6 +36,7 @@ void show_coordinate(){
 
     ins_object(100, 200, coordTab, screen, null);
 }
+*/
 
 void char_constructor(){
     HERO.xVel = 0;
@@ -48,7 +50,27 @@ void ia_enemy_up(){
 
 }
 
-void read_map(){
+enemylist* insert_enemy_list(enemylist* enemies, int x, int y, int enemyClass){
+    enemylist* head = (enemylist*)malloc(sizeof(enemylist));
+    enemy* e = (enemy*)malloc(sizeof(enemy));
+    e->enemyClass = enemyClass;
+    e->x = x;
+    e->y = y;
+
+    if(!enemies){
+        head->enemy = e;
+        head->next = null;
+
+        return head;
+    } else{
+        head->next = enemies;
+        head->enemy = e;
+
+        return head;
+    }
+}
+
+enemylist* read_map(enemylist* enemies){
     FILE* arq;
     char* str[2];
 
@@ -60,28 +82,65 @@ void read_map(){
         for(int j = 0; j < 22; j++){
             fscanf(arq, "%s ", str);
             map[i][j] = atoi(str);
+            if(map[i][j] == 4){
+                enemies = insert_enemy_list(enemies, i, j, 1);
+            }
+            if(map[i][j] == 5){
+                PORTAL.x = i;
+                PORTAL.y = j;
+            }
         }
     }
 
     fclose(arq);
+
+    return enemies;
+}
+
+void draw_enemies(enemylist* enemies){
+    enemylist* temp = enemies;
+
+    if(temp){
+        while(temp != NULL){
+            //ins_object((temp->enemy->y * 34), (temp->enemy->x * 33), objects, screen, &IOBJ.destructive);
+            temp = temp->next;
+        }
+    }
 }
 
 void draw_map(){
     for(int i = 1; i < 12; i++){
         for(int j = 0; j < 22; j++){
             if(map[i][j] == false) ins_object((j * 34), (i * 33) + 55, objects, screen, &IOBJ.destructive);
+            //if(map[i][j] == 3) ins_object((j * 34), (i * 33) + 55, objects, screen, &IOBJ.destructive);
         }
     }
+}
+
+void portal_on(){
+    ins_object((PORTAL.y * 33) - 5, (PORTAL.x * 37) + PORTAL.portal_animation[PORTAL.frames].h, portal, screen, &PORTAL.portal_animation[PORTAL.frames]);
+
+    PORTAL.frames++;
+
+    if(PORTAL.frames == 2){
+        PORTAL.frames = 0;
+    }
+}
+
+void stage_clear(){
+
 }
 
 void game_start(){
     int quit = true;
 
-    read_map();
+    listEnemies = read_map(listEnemies);
 
     HERO.life = 3;
     HERO.points = 0;
     HERO.time = 300;
+
+    PORTAL.frames = 0;
 
     fase1 = IMG_Load("Mapas/fase1_new_remod.png");
     bomb_sprites = IMG_Load("Sprites/bomb2.png");
@@ -98,6 +157,7 @@ void game_start(){
 
     objeto.x = 200;
     objeto.y = 200;
+
 
     while(quit){
         start();
@@ -124,18 +184,21 @@ void game_start(){
 
         //draw_map();
 
+        draw_enemies(listEnemies);
+
         life_game();
 
         sum_point();
 
         game_time();
 
-        show_coordinate();
+        //show_coordinate();
+
+        portal_on();
 
         quit = its_gameover();
 
         if(BOMB.bombStatus == true){
-            //ins_object(BOMB.x, BOMB.y, bomb_sprites, screen, &BOMB.bomb_img[0]);
             bomb_timer();
         }
 

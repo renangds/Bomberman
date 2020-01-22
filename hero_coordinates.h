@@ -59,10 +59,22 @@ static struct explosion_animation{
 } EXPLOSION;
 
 typedef struct enemy_moves{
-    int yVel;
-    int xVel;
     int x;
     int y;
     int nextMove;
     int enemyClass;
 } enemy;
+
+typedef struct enemy_list{
+    struct enemy_list* next;
+    enemy* enemy;
+} enemylist;
+
+static struct portal{
+    SDL_Rect portal_animation[3];
+    int frames;
+    int x;
+    int y;
+} PORTAL;
+
+enemylist* listEnemies;

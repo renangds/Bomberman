@@ -30,6 +30,7 @@ SDL_Surface* clock_sprite;
 SDL_Surface* heart_sprite;
 SDL_Surface* objects;
 SDL_Surface* explosion_sprite;
+SDL_Surface* portal;
 
 SDL_Surface* life_gui;
 SDL_Surface* time_gui;

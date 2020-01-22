@@ -110,6 +110,9 @@ void move_actor(){
     {
         HERO.y -= HERO.yVel;
     }
+
+    HERO.table_x = (HERO.x+23)/33;
+    HERO.table_y = (HERO.y+25)/34;
 }
 
 void insert_actor(){
