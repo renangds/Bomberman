@@ -9,13 +9,12 @@
 #include "bomb.h"
 #include "moves_inserts.h"
 
-
 void show_coordinate(){
     char x[10];
     char y[10];
 
     HERO.table_x = (HERO.x+30)/48;
-    HERO.table_y = (HERO.y+30)/48;
+    HERO.table_y = (HERO.y+35)/48;
 
     sprintf(x, "%d ", HERO.x);
     sprintf(y, "%d ", HERO.y);
@@ -26,6 +25,7 @@ void show_coordinate(){
 
     char xt[10];
     char yt[10];
+    char obji[10];
 
     //HERO.table_x = (HERO.x+23)/33;
     //HERO.table_y = (HERO.y+25)/34;
@@ -38,6 +38,12 @@ void show_coordinate(){
     SDL_Surface* coordTab = TTF_RenderText_Solid(kono_font, strcat(xt, yt), color_menu1);
 
     ins_object(100, 200, coordTab, screen, null);
+
+    sprintf(obji, "%d ", map_stage[HERO.table_y][HERO.table_x]);
+
+    SDL_Surface* obj = TTF_RenderText_Solid(kono_font, obji, color_menu3);
+
+    ins_object(100, 300, obj, screen, null);
 }
 
 
@@ -187,8 +193,6 @@ void game_start(){
             }
         }
 
-        
-
         move_actor();
 
         portal_respawn();
@@ -210,9 +214,6 @@ void game_start(){
         //draw_enemies(listEnemies);
 
         show_coordinate();
-
-        
-
 
         //portal_on();
 

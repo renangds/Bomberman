@@ -96,21 +96,53 @@ int enemy_kick(SDL_Rect* image, enemy* e){
     return true;
 }
 
-int map_collision(){
-    int topH = HERO.y + 40;
-    int bottomI = (map_stage[HERO.table_y-1][HERO.table_x] * 48) + 80;
+int collision_right(){
 
-    int bottomH = HERO.y + 30;
-    int topI = (map_stage[HERO.table_y+1][HERO.table_x] * 48) + 80;
+    int leftH = HERO.x;
+    int rightI = ((HERO.table_x-1) * 48) + 30;
 
-    if(map_stage[HERO.table_y-2][HERO.table_x] == 0 || map_stage[HERO.table_y-2][HERO.table_x] == 4){
-        if(topH >= bottomI) return false;
+    if(!map_stage[HERO.table_y-1][HERO.table_x-1] || map_stage[HERO.table_y-1][HERO.table_x-1] == 4){
+
+        if(leftH > rightI) return false;
 
         return true;
     }
 
-    if(map_stage[HERO.table_y-3][HERO.table_x] == 0){
-        if(bottomH <= topI) return false;
+    return false;
+}
+
+int collision_top(){
+    int topH = HERO.y;
+    int bottomI = ((HERO.table_y-2) * 48) + 80;
+
+    if(!map_stage[HERO.table_y-2][HERO.table_x] || map_stage[HERO.table_y-2][HERO.table_x] == 4){
+        if(topH > bottomI) return false;
+
+        return true;
+    }
+
+    return false;
+}
+
+int collsion_bottom(){
+    int bottomH = HERO.y + 30;
+    int topI = ((HERO.table_y) * 48) + 40;
+
+    if(!map_stage[HERO.table_y][HERO.table_x] || map_stage[HERO.table_y][HERO.table_x] == 4){
+        if(bottomH < topI) return false;
+
+        return true;
+    }
+
+    return false;
+}
+
+int collision_left(){
+    int rightH = HERO.x + 45;
+    int leftI = ((HERO.table_x+1) * 48);
+
+    if(!map_stage[HERO.table_y-1][HERO.table_x+1] || map_stage[HERO.table_y-1][HERO.table_x+1] == 4){
+        if(rightH <= leftI) return false;
 
         return true;
     }
@@ -121,16 +153,14 @@ int map_collision(){
 void move_actor(){
     HERO.x += HERO.xVel;
 
-    if( ( HERO.x < 0 ) || ( HERO.x + 32 > SCREEN_WIDTH ))
-    {
+    if((HERO.x < 0) || (HERO.x + 32 > SCREEN_WIDTH) || collsion_bottom() || collision_right() || collision_top() || collision_left()){
         HERO.x -= HERO.xVel;
     }
 
     HERO.y += HERO.yVel;
 
     
-    if( ( HERO.y < 0 ) || ( HERO.y + 32 > SCREEN_HEIGHT ) )
-    {
+    if((HERO.y < 0) || (HERO.y + 32 > SCREEN_HEIGHT) || collsion_bottom() || collision_right() || collision_top() || collision_left()){
         HERO.y -= HERO.yVel;
     }
     

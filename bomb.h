@@ -67,11 +67,11 @@ void explosion_animation(){
         }
 
         //Baixo
-        if(map_stage[EXPLOSION.y_map+2][EXPLOSION.x_map] > 0){
+        if(map_stage[EXPLOSION.y_map][EXPLOSION.x_map] > 0){
             ins_object(EXPLOSION.x, EXPLOSION.y + (EXPLOSION.explosion_center.h), 
             explosion_sprite, screen, &EXPLOSION.explosion_down[EXPLOSION.frames]);
         
-            if(map_stage[EXPLOSION.y_map+3][EXPLOSION.x_map] > 0){
+            if(map_stage[EXPLOSION.y_map+1][EXPLOSION.x_map] > 0){
                 ins_object(EXPLOSION.x, EXPLOSION.y + (EXPLOSION.explosion_center.h)
                     + (EXPLOSION.explosion_down[EXPLOSION.frames+2].h), explosion_sprite, screen, &EXPLOSION.explosion_down[EXPLOSION.frames+2]);
             }
