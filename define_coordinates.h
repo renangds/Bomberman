@@ -1,96 +1,66 @@
 void define_coordinates(){
-    HERO.front_clip[0].x = 145;
+    HERO.front_clip[0].x = 1;
     HERO.front_clip[0].y = 1;
-    HERO.front_clip[0].h = 47;
-    HERO.front_clip[0].w = 45;
+    HERO.front_clip[0].h = 71;
+    HERO.front_clip[0].w = 61;
 
-    HERO.front_clip[1].x = 193;
+    HERO.front_clip[1].x = 73;
     HERO.front_clip[1].y = 0;
-    HERO.front_clip[1].h = 48;
-    HERO.front_clip[1].w = 45;
+    HERO.front_clip[1].h = 72;
+    HERO.front_clip[1].w = 61;
 
-    HERO.front_clip[2].x = 241;
-    HERO.front_clip[2].y = 1;
-    HERO.front_clip[2].h = 47;
-    HERO.front_clip[2].w = 45;
+    HERO.front_clip[2].x = 145;
+    HERO.front_clip[2].y = 0;
+    HERO.front_clip[2].h = 72;
+    HERO.front_clip[2].w = 61;
 
 
-    HERO.behind_clip[0].x = 146;
-    HERO.behind_clip[0].y = 145;
-    HERO.behind_clip[0].h = 47;
-    HERO.behind_clip[0].w = 43;
+    HERO.behind_clip[0].x = 0;
+    HERO.behind_clip[0].y = 216;
+    HERO.behind_clip[0].h = 72;
+    HERO.behind_clip[0].w = 60;
 
-    HERO.behind_clip[1].x = 194;
-    HERO.behind_clip[1].y = 144;
-    HERO.behind_clip[1].h = 48;
-    HERO.behind_clip[1].w = 43;
+    HERO.behind_clip[1].x = 72;
+    HERO.behind_clip[1].y = 216;
+    HERO.behind_clip[1].h = 72;
+    HERO.behind_clip[1].w = 60;
 
-    HERO.behind_clip[2].x = 242;
-    HERO.behind_clip[2].y = 145;
-    HERO.behind_clip[2].h = 47;
-    HERO.behind_clip[2].w = 43;
+    HERO.behind_clip[2].x = 144;
+    HERO.behind_clip[2].y = 216;
+    HERO.behind_clip[2].h = 72;
+    HERO.behind_clip[2].w = 60;
 
     
-    HERO.left_clip[0].x = 146;
-    HERO.left_clip[0].y = 49;
-    HERO.left_clip[0].h = 47;
-    HERO.left_clip[0].w = 43;
+    HERO.left_clip[0].x = 1;
+    HERO.left_clip[0].y = 73;
+    HERO.left_clip[0].h = 71;
+    HERO.left_clip[0].w = 62;
 
-    HERO.left_clip[1].x = 194;
-    HERO.left_clip[1].y = 48;
-    HERO.left_clip[1].h = 48;
-    HERO.left_clip[1].w = 43;
+    HERO.left_clip[1].x = 73;
+    HERO.left_clip[1].y = 73;
+    HERO.left_clip[1].h = 71;
+    HERO.left_clip[1].w = 62;
 
-    HERO.left_clip[2].x = 242;
-    HERO.left_clip[2].y = 49;
-    HERO.left_clip[2].h = 47;
-    HERO.left_clip[2].w = 43;
-
-    HERO.right_clip[0].x = 146;
-    HERO.right_clip[0].y = 97;
-    HERO.right_clip[0].h = 47;
-    HERO.right_clip[0].w = 43;
-
-    HERO.right_clip[1].x = 194;
-    HERO.right_clip[1].y = 96;
-    HERO.right_clip[1].h = 48;
-    HERO.right_clip[1].w = 43;
-
-    HERO.right_clip[2].x = 242;
-    HERO.right_clip[2].y = 97;
-    HERO.right_clip[2].h = 47;
-    HERO.right_clip[2].w = 43;
-
-    //Bomba
-
-    BOMB.bomb_img[0].x = 5;
-    BOMB.bomb_img[0].y = 63;
-    BOMB.bomb_img[0].h = 32;
-    BOMB.bomb_img[0].w = 26;
+    HERO.left_clip[2].x = 145;
+    HERO.left_clip[2].y = 73;
+    HERO.left_clip[2].h = 71;
+    HERO.left_clip[2].w = 62;
 
 
-    BOMB.bomb_img[1].x = 0;
-    BOMB.bomb_img[1].y = 12;
-    BOMB.bomb_img[1].h = 42;
-    BOMB.bomb_img[1].w = 38;
+    HERO.right_clip[0].x = 0;
+    HERO.right_clip[0].y = 145;
+    HERO.right_clip[0].h = 71;
+    HERO.right_clip[0].w = 60;
 
+    HERO.right_clip[1].x = 70;
+    HERO.right_clip[1].y = 145;
+    HERO.right_clip[1].h = 71;
+    HERO.right_clip[1].w = 62;
 
-    BOMB.bomb_img[2].x = 34;
-    BOMB.bomb_img[2].y = 7;
-    BOMB.bomb_img[2].h = 42;
-    BOMB.bomb_img[2].w = 38;
-
-
-    BOMB.bomb_img[3].x = 78;
-    BOMB.bomb_img[3].y = 4;
-    BOMB.bomb_img[3].h = 45;
-    BOMB.bomb_img[3].w = 40;
-
-
-    BOMB.bomb_img[4].x = 124;
-    BOMB.bomb_img[4].y = 0;
-    BOMB.bomb_img[4].h = 49;
-    BOMB.bomb_img[4].w = 40;
+    HERO.right_clip[2].x = 142;
+    HERO.right_clip[2].y = 145;
+    HERO.right_clip[2].h = 71;
+    HERO.right_clip[2].w = 62;
 
     //Heart Clips
 
@@ -106,174 +76,120 @@ void define_coordinates(){
 
     //Frog Clips
 
-    ENEMY1.front_clip[0].x = 57;
-    ENEMY1.front_clip[0].y = 15;
-    ENEMY1.front_clip[0].h = 30;
-    ENEMY1.front_clip[0].w = 30;
+    ENEMY1.clips[0].x = 78;
+    ENEMY1.clips[0].y = 6;
+    ENEMY1.clips[0].h = 62;
+    ENEMY1.clips[0].w = 63;
 
-    ENEMY1.front_clip[1].x = 6;
-    ENEMY1.front_clip[1].y = 8;
-    ENEMY1.front_clip[1].h = 37;
-    ENEMY1.front_clip[1].w = 36;
-
-    ENEMY1.front_clip[2].x = 102;
-    ENEMY1.front_clip[2].y = 8;
-    ENEMY1.front_clip[2].h = 37;
-    ENEMY1.front_clip[2].w = 36;
-
-
-    ENEMY1.left_clip[0].x = 53;
-    ENEMY1.left_clip[0].y = 70;
-    ENEMY1.left_clip[0].h = 24;
-    ENEMY1.left_clip[0].w = 33;
-
-    ENEMY1.left_clip[1].x = 0;
-    ENEMY1.left_clip[1].y = 62;
-    ENEMY1.left_clip[1].h = 32;
-    ENEMY1.left_clip[1].w = 47;
-
-    ENEMY1.left_clip[2].x = 96;
-    ENEMY1.left_clip[2].y = 62;
-    ENEMY1.left_clip[2].h = 32;
-    ENEMY1.left_clip[2].w = 47;
-
-
-    ENEMY1.right_clip[0].x = 58;
-    ENEMY1.right_clip[0].y = 118;
-    ENEMY1.right_clip[0].h = 24;
-    ENEMY1.right_clip[0].w = 33;
-
-    ENEMY1.right_clip[1].x = 1;
-    ENEMY1.right_clip[1].y = 110;
-    ENEMY1.right_clip[1].h = 33;
-    ENEMY1.right_clip[1].w = 47;
-
-    ENEMY1.right_clip[2].x = 97;
-    ENEMY1.right_clip[2].y = 110;
-    ENEMY1.right_clip[2].h = 32;
-    ENEMY1.right_clip[2].w = 47;
-
-
-    ENEMY1.behind_clip[0].x = 54;
-    ENEMY1.behind_clip[0].y = 159;
-    ENEMY1.behind_clip[0].h = 29;
-    ENEMY1.behind_clip[0].w = 38;
-
-    ENEMY1.behind_clip[1].x = 6;
-    ENEMY1.behind_clip[1].y = 148;
-    ENEMY1.behind_clip[1].h = 45;
-    ENEMY1.behind_clip[1].w = 32;
-
-    ENEMY1.behind_clip[2].x = 102;
-    ENEMY1.behind_clip[2].y = 148;
-    ENEMY1.behind_clip[2].h = 44;
-    ENEMY1.behind_clip[2].w = 32;
+    ENEMY1.clips[1].x = 148;
+    ENEMY1.clips[1].y = 7;
+    ENEMY1.clips[1].h = 62;
+    ENEMY1.clips[1].w = 63;
 
     //Alguns objetos destrutíveis e indestrutíveis
 
-    IOBJ.destructive.x = 288;
-    IOBJ.destructive.y = 480;
-    IOBJ.destructive.h = 32;
-    IOBJ.destructive.w = 32;
+    IOBJ.indest.x = 49;
+    IOBJ.indest.y = 2785;
+    IOBJ.indest.h = 47;
+    IOBJ.indest.w = 47;
 
-    IOBJ.indest.x = 33;
-    IOBJ.indest.x = 420;
-    IOBJ.indest.w = 30;
-    IOBJ.indest.h = 27;
+    IOBJ.destructive.x = 6;
+    IOBJ.destructive.y = 12;
+    IOBJ.destructive.w = 44;
+    IOBJ.destructive.h = 42;
 
     //Explosões
 
-    EXPLOSION.explosion_down[0].x = 122;
-    EXPLOSION.explosion_down[0].y = 2;
-    EXPLOSION.explosion_down[0].h = 34;
-    EXPLOSION.explosion_down[0].w = 37;
+    EXPLOSION.explosion_up[0].x = 150;
+    EXPLOSION.explosion_up[0].y = 2;
+    EXPLOSION.explosion_up[0].h = 42;
+    EXPLOSION.explosion_up[0].w = 47;
 
-    EXPLOSION.explosion_down[1].x = 163;
-    EXPLOSION.explosion_down[1].y = 2;
-    EXPLOSION.explosion_down[1].h = 34;
-    EXPLOSION.explosion_down[1].w = 37;
+    EXPLOSION.explosion_up[1].x = 201;
+    EXPLOSION.explosion_up[1].y = 2;
+    EXPLOSION.explosion_up[1].h = 42;
+    EXPLOSION.explosion_up[1].w = 47;
 
-    EXPLOSION.explosion_down[2].x = 202;
-    EXPLOSION.explosion_down[2].y = 2;
-    EXPLOSION.explosion_down[2].h = 34;
-    EXPLOSION.explosion_down[2].w = 37;
-
-    EXPLOSION.explosion_down[3].x = 282;
-    EXPLOSION.explosion_down[3].y = 2;
-    EXPLOSION.explosion_down[3].h = 34;
-    EXPLOSION.explosion_down[3].w = 37;
-
-
-    //Cima
-
-    EXPLOSION.explosion_up[0].x = 241;
-    EXPLOSION.explosion_up[0].y = 72;
-    EXPLOSION.explosion_up[0].h = 34;
-    EXPLOSION.explosion_up[0].w = 37;
-
-    EXPLOSION.explosion_up[1].x = 280;
-    EXPLOSION.explosion_up[1].y = 72;
-    EXPLOSION.explosion_up[1].h = 34;
-    EXPLOSION.explosion_up[1].w = 37;
-
-    EXPLOSION.explosion_up[2].x = 201;
-    EXPLOSION.explosion_up[2].y = 72;
-    EXPLOSION.explosion_up[2].h = 34;
-    EXPLOSION.explosion_up[2].w = 37;
+    EXPLOSION.explosion_up[2].x = 248;
+    EXPLOSION.explosion_up[2].y = 88;
+    EXPLOSION.explosion_up[2].h = 43;
+    EXPLOSION.explosion_up[2].w = 47;
 
     EXPLOSION.explosion_up[3].x = 1;
-    EXPLOSION.explosion_up[3].y = 108;
-    EXPLOSION.explosion_up[3].h = 34;
-    EXPLOSION.explosion_up[3].w = 37;
+    EXPLOSION.explosion_up[3].y = 131;
+    EXPLOSION.explosion_up[3].h = 43;
+    EXPLOSION.explosion_up[3].w = 47;
+
+    //Baixo
+
+    EXPLOSION.explosion_down[0].x = 297;
+    EXPLOSION.explosion_down[0].y = 88;
+    EXPLOSION.explosion_down[0].h = 43;
+    EXPLOSION.explosion_down[0].w = 47;
+
+    EXPLOSION.explosion_down[1].x = 345;
+    EXPLOSION.explosion_down[1].y = 88;
+    EXPLOSION.explosion_down[1].h = 43;
+    EXPLOSION.explosion_down[1].w = 47;
+
+    EXPLOSION.explosion_down[2].x = 250;
+    EXPLOSION.explosion_down[2].y = 2;
+    EXPLOSION.explosion_down[2].h = 42;
+    EXPLOSION.explosion_down[2].w = 47;
+
+    EXPLOSION.explosion_down[3].x = 348;
+    EXPLOSION.explosion_down[3].y = 2;
+    EXPLOSION.explosion_down[3].h = 42;
+    EXPLOSION.explosion_down[3].w = 47;
 
     //Left
 
-    EXPLOSION.explosion_left[0].x = 41;
-    EXPLOSION.explosion_left[0].y = 38;
-    EXPLOSION.explosion_left[0].h = 33;
-    EXPLOSION.explosion_left[0].w = 39;
+    EXPLOSION.explosion_left[0].x = 51;
+    EXPLOSION.explosion_left[0].y = 46;
+    EXPLOSION.explosion_left[0].h = 41;
+    EXPLOSION.explosion_left[0].w = 47;
 
-    EXPLOSION.explosion_left[1].x = 81;
-    EXPLOSION.explosion_left[1].y = 38;
-    EXPLOSION.explosion_left[1].h = 33;
-    EXPLOSION.explosion_left[1].w = 39;
+    EXPLOSION.explosion_left[1].x = 100;
+    EXPLOSION.explosion_left[1].y = 46;
+    EXPLOSION.explosion_left[1].h = 41;
+    EXPLOSION.explosion_left[1].w = 47;
 
-    EXPLOSION.explosion_left[2].x = 124;
-    EXPLOSION.explosion_left[2].y = 39;
-    EXPLOSION.explosion_left[2].h = 34;
-    EXPLOSION.explosion_left[2].w = 35;
+    EXPLOSION.explosion_left[2].x = 150;
+    EXPLOSION.explosion_left[2].y = 46;
+    EXPLOSION.explosion_left[2].h = 41;
+    EXPLOSION.explosion_left[2].w = 47;
 
-    EXPLOSION.explosion_left[3].x = 204;
-    EXPLOSION.explosion_left[3].y = 38;
-    EXPLOSION.explosion_left[3].h = 33;
-    EXPLOSION.explosion_left[3].w = 36;
+    EXPLOSION.explosion_left[3].x = 249;
+    EXPLOSION.explosion_left[3].y = 46;
+    EXPLOSION.explosion_left[3].h = 41;
+    EXPLOSION.explosion_left[3].w = 47;
 
     //Right
 
-    EXPLOSION.explosion_right[0].x = 281;
-    EXPLOSION.explosion_right[0].y = 37;
-    EXPLOSION.explosion_right[0].h = 33;
-    EXPLOSION.explosion_right[0].w = 38;
+    EXPLOSION.explosion_right[0].x = 347;
+    EXPLOSION.explosion_right[0].y = 45;
+    EXPLOSION.explosion_right[0].h = 41;
+    EXPLOSION.explosion_right[0].w = 47;
 
     EXPLOSION.explosion_right[1].x = 1;
-    EXPLOSION.explosion_right[1].y = 72;
-    EXPLOSION.explosion_right[1].h = 33;
-    EXPLOSION.explosion_right[1].w = 38;
+    EXPLOSION.explosion_right[1].y = 88;
+    EXPLOSION.explosion_right[1].h = 41;
+    EXPLOSION.explosion_right[1].w = 47;
 
-    EXPLOSION.explosion_right[2].x = 41;
-    EXPLOSION.explosion_right[2].y = 73;
-    EXPLOSION.explosion_right[2].h = 30;
-    EXPLOSION.explosion_right[2].w = 35;
+    EXPLOSION.explosion_right[2].x = 51;
+    EXPLOSION.explosion_right[2].y = 88;
+    EXPLOSION.explosion_right[2].h = 41;
+    EXPLOSION.explosion_right[2].w = 47;
 
-    EXPLOSION.explosion_right[3].x = 121;
-    EXPLOSION.explosion_right[3].y = 73;
-    EXPLOSION.explosion_right[3].h = 30;
-    EXPLOSION.explosion_right[3].w = 35;
+    EXPLOSION.explosion_right[3].x = 149;
+    EXPLOSION.explosion_right[3].y = 88;
+    EXPLOSION.explosion_right[3].h = 41;
+    EXPLOSION.explosion_right[3].w = 47;
 
-    EXPLOSION.explosion_center.x = 280;
-    EXPLOSION.explosion_center.y = 107;
-    EXPLOSION.explosion_center.h = 35;
-    EXPLOSION.explosion_center.w = 40;
+    EXPLOSION.explosion_center.x = 346;
+    EXPLOSION.explosion_center.y = 132;
+    EXPLOSION.explosion_center.h = 42;
+    EXPLOSION.explosion_center.w = 48;
 
     //Portal
 
@@ -291,4 +207,23 @@ void define_coordinates(){
     PORTAL.portal_animation[2].y = 295;
     PORTAL.portal_animation[2].h = 40;
     PORTAL.portal_animation[2].w = 36;
+
+    //Itens do jogo
+
+    ITEMS.bomb_activate.x = 717;
+    ITEMS.bomb_activate.y = 54;
+    ITEMS.bomb_activate.h = 48;
+    ITEMS.bomb_activate.w = 48;
+
+    ITEMS.bomb_exploded.x = 669;
+    ITEMS.bomb_exploded.y = 60;
+    ITEMS.bomb_exploded.h = 36;
+    ITEMS.bomb_exploded.w = 42;
+
+    //Portal de início
+
+    PORTAL_RESPAWN.portal.x = 8;
+    PORTAL_RESPAWN.portal.y = 274;
+    PORTAL_RESPAWN.portal.h = 37;
+    PORTAL_RESPAWN.portal.w = 46;
 }

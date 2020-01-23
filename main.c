@@ -9,10 +9,13 @@
 #include "bomb.h"
 #include "moves_inserts.h"
 
-/*
+
 void show_coordinate(){
     char x[10];
     char y[10];
+
+    HERO.table_x = (HERO.x+30)/48;
+    HERO.table_y = (HERO.y+30)/48;
 
     sprintf(x, "%d ", HERO.x);
     sprintf(y, "%d ", HERO.y);
@@ -29,14 +32,14 @@ void show_coordinate(){
 
     //printf("%d %d\n", HERO.table_x, HERO.table_y);
 
-    sprintf(xt, "%d ", ((HERO.x+23)/33));
-    sprintf(yt, "%d ", ((HERO.y+25)/34));
+    sprintf(xt, "%d ", HERO.table_x);
+    sprintf(yt, "%d ", HERO.table_y);
 
     SDL_Surface* coordTab = TTF_RenderText_Solid(kono_font, strcat(xt, yt), color_menu1);
 
     ins_object(100, 200, coordTab, screen, null);
 }
-*/
+
 
 void char_constructor(){
     HERO.xVel = 0;
@@ -74,18 +77,24 @@ enemylist* read_map(enemylist* enemies){
     FILE* arq;
     char* str[2];
 
-    if((arq = fopen("Arquivos/fase1.txt", "r")) == null){
+    if((arq = fopen("Arquivos/stage1.txt", "r")) == null){
         exit(1);
     }
 
-    for(int i = 0; i < 13; i++){
-        for(int j = 0; j < 22; j++){
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 16; j++){
             fscanf(arq, "%s ", str);
-            map[i][j] = atoi(str);
+            map_stage[i][j] = atoi(str);
+            /*
             if(map[i][j] == 4){
                 enemies = insert_enemy_list(enemies, i, j, 1);
             }
-            if(map[i][j] == 5){
+            */
+           if(map_stage[i][j] == 6){
+               PORTAL_RESPAWN.x = i;
+               PORTAL_RESPAWN.y = j;
+           }
+            if(map_stage[i][j] == 5){
                 PORTAL.x = i;
                 PORTAL.y = j;
             }
@@ -109,10 +118,11 @@ void draw_enemies(enemylist* enemies){
 }
 
 void draw_map(){
-    for(int i = 1; i < 12; i++){
-        for(int j = 0; j < 22; j++){
-            if(map[i][j] == false) ins_object((j * 34), (i * 33) + 55, objects, screen, &IOBJ.destructive);
-            //if(map[i][j] == 3) ins_object((j * 34), (i * 33) + 55, objects, screen, &IOBJ.destructive);
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 16; j++){
+            if(map_stage[i][j] == 2) ins_object((j * 48), (i * 48) + 80, chest, screen, &IOBJ.destructive);
+            if(map_stage[i][j] == false) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.indest);
+            if(map_stage[i][j] == 4) ins_object((j * 48), (i * 48) + 80, chest, screen, &IOBJ.destructive);
         }
     }
 }
@@ -131,6 +141,10 @@ void stage_clear(){
 
 }
 
+void portal_respawn(){
+    ins_object(PORTAL_RESPAWN.y * 48, PORTAL_RESPAWN.x * 48, portal, screen, &PORTAL_RESPAWN.portal);
+}
+
 void game_start(){
     int quit = true;
 
@@ -142,11 +156,9 @@ void game_start(){
 
     PORTAL.frames = 0;
 
-    fase1 = IMG_Load("Mapas/fase1_new_remod.png");
-    bomb_sprites = IMG_Load("Sprites/bomb2.png");
+    fase1 = IMG_Load("Mapas/stage1.png");
     frog_sprite = IMG_Load("Sprites/frog.png");
-    clock_sprite = IMG_Load("Sprites/clock.png");
-
+    
     enemy e1;
 
     e1.x = 200;
@@ -157,6 +169,9 @@ void game_start(){
 
     objeto.x = 200;
     objeto.y = 200;
+
+    HERO.x = (PORTAL_RESPAWN.x * 48);
+    HERO.y = (PORTAL_RESPAWN.y * 48);
 
 
     while(quit){
@@ -172,29 +187,34 @@ void game_start(){
             }
         }
 
+        
+
         move_actor();
+
+        portal_respawn();
+
+        portal_on();
 
         SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 62, 101, 91 ) );
 
-        ins_object(0, 61, fase1, screen, null);
+        show_guis();
 
-        ins_object(objeto.x, objeto.y, objects, screen, &IOBJ.destructive);
+        ins_object(0, 80, fase1, screen, null);
+
+        ins_object((PORTAL_RESPAWN.y * 48), (PORTAL_RESPAWN.x * 48)+80, portal, screen, &PORTAL_RESPAWN.portal);
 
         //move_enemies(&e1);
 
-        //draw_map();
+        draw_map();
 
-        draw_enemies(listEnemies);
+        //draw_enemies(listEnemies);
 
-        life_game();
+        show_coordinate();
 
-        sum_point();
+        
 
-        game_time();
 
-        //show_coordinate();
-
-        portal_on();
+        //portal_on();
 
         quit = its_gameover();
 

@@ -27,11 +27,23 @@ init_images(){
 
     heart_sprite = IMG_Load("Sprites/heart_med.png");
 
-    map_characters = IMG_Load("Sprites/kono_hero.jpg");
+    map_characters = IMG_Load("Sprites/megumin.png");
 
-    explosion_sprite = IMG_Load("Sprites/explosoes.png");
+    explosion_sprite = IMG_Load("Sprites/explosion.png");
 
-    portal = IMG_Load("Sprites/portal.png");
+    portal = IMG_Load("Sprites/portal_m.png");
+
+    bomb = IMG_Load("Sprites/bombnew.png");
+
+    stage_objs = IMG_Load("Sprites/objects.png");
+
+    chest = IMG_Load("Sprites/chest.png");
+
+    items_game = IMG_Load("Sprites/items.png");
+
+    clock_sprite = IMG_Load("Sprites/clock.png");
+    
+    background_gui = IMG_Load("Sprites/background_gui.png");
 
     if(!heart_sprite || !map_characters) exit(1);
 }

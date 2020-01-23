@@ -14,11 +14,12 @@
 #define BOMB_DEFAULT 2
 #define EXPLOSION_DEFAULT 1
 
-static int SCREEN_WIDTH = 720;
-static int SCREEN_HEIGHT = 480;
+static int SCREEN_WIDTH = 768; //O TAMANHO DO BLOCO É 48X48!
+static int SCREEN_HEIGHT = 560; //A altura da imagem original do game é 480px, diferença de 40px atualmente 
 static int SCREEN_BPP = 32;
 
 int map[13][22];
+int map_stage[10][16]; //Está coluna por linha.
 
 SDL_Event event;
 SDL_Surface* screen;
@@ -31,6 +32,11 @@ SDL_Surface* heart_sprite;
 SDL_Surface* objects;
 SDL_Surface* explosion_sprite;
 SDL_Surface* portal;
+SDL_Surface* bomb;
+SDL_Surface* stage_objs;
+SDL_Surface* chest;
+SDL_Surface* items_game;
+SDL_Surface* background_gui;
 
 SDL_Surface* life_gui;
 SDL_Surface* time_gui;

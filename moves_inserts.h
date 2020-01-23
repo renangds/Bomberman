@@ -96,23 +96,44 @@ int enemy_kick(SDL_Rect* image, enemy* e){
     return true;
 }
 
+int map_collision(){
+    int topH = HERO.y + 40;
+    int bottomI = (map_stage[HERO.table_y-1][HERO.table_x] * 48) + 80;
+
+    int bottomH = HERO.y + 30;
+    int topI = (map_stage[HERO.table_y+1][HERO.table_x] * 48) + 80;
+
+    if(map_stage[HERO.table_y-2][HERO.table_x] == 0 || map_stage[HERO.table_y-2][HERO.table_x] == 4){
+        if(topH >= bottomI) return false;
+
+        return true;
+    }
+
+    if(map_stage[HERO.table_y-3][HERO.table_x] == 0){
+        if(bottomH <= topI) return false;
+
+        return true;
+    }
+
+    return false;
+}
+
 void move_actor(){
     HERO.x += HERO.xVel;
 
-    if( ( HERO.x < 0 ) || ( HERO.x + 32 > SCREEN_WIDTH ) || enemy_collisions() )
+    if( ( HERO.x < 0 ) || ( HERO.x + 32 > SCREEN_WIDTH ))
     {
         HERO.x -= HERO.xVel;
     }
 
     HERO.y += HERO.yVel;
 
-    if( ( HERO.y < 0 ) || ( HERO.y + 32 > SCREEN_HEIGHT ) || enemy_collisions() )
+    
+    if( ( HERO.y < 0 ) || ( HERO.y + 32 > SCREEN_HEIGHT ) )
     {
         HERO.y -= HERO.yVel;
     }
-
-    HERO.table_x = (HERO.x+23)/33;
-    HERO.table_y = (HERO.y+25)/34;
+    
 }
 
 void insert_actor(){
@@ -142,6 +163,8 @@ void insert_enemy(enemy* e, SDL_Surface* image){
     ins_object(e->x, e->y, frog_sprite, screen, image);
 }
 
+
+/*
 void move_frog(enemy* e){
         int direction = rand()%4;
 
@@ -175,12 +198,15 @@ void move_frog(enemy* e){
         
 }
 
+
 void move_enemies(enemy* e){
     switch(e->enemyClass){
         case 0:
             move_frog(e);
     }
 }
+
+*/
 
 enemy* enemies_stage(){
     enemy enemies[10];

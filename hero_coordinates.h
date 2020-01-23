@@ -24,14 +24,13 @@ static struct bomb{
     int bombStatus;
     int x;
     int y;
+    int x_map;
+    int y_map;
     int frames;
 } BOMB;
 
 static struct enemy1_coordinates{
-    SDL_Rect front_clip[3];
-    SDL_Rect behind_clip[3];
-    SDL_Rect left_clip[3];
-    SDL_Rect right_clip[3];
+    SDL_Rect clips[2];
 } ENEMY1;
 
 static struct object_image{
@@ -56,6 +55,8 @@ static struct explosion_animation{
     int x;
     int y;
     int timeStart;
+    int x_map;
+    int y_map;
 } EXPLOSION;
 
 typedef struct enemy_moves{
@@ -76,5 +77,16 @@ static struct portal{
     int x;
     int y;
 } PORTAL;
+
+static struct portal_init{
+    SDL_Rect portal;
+    int x;
+    int y;
+} PORTAL_RESPAWN;
+
+static struct items{
+    SDL_Rect bomb_activate;
+    SDL_Rect bomb_exploded;
+} ITEMS;
 
 enemylist* listEnemies;
