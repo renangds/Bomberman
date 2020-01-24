@@ -17,6 +17,7 @@ void event_keyboard_handle(){
             case SDLK_SPACE: bomb_handle(); break;
             case SDLK_F10: HERO.life -= 1; break;
             case SDLK_F11: HERO.points += 10; break;
+            case SDLK_F9: HERO.life = 3; break;
         }
     } else if (event.type == SDL_KEYUP){
         if(HERO.yVel != 30 || HERO.xVel != 30){
@@ -63,25 +64,35 @@ int enemy_collisions(){
     return true;
 }
 
-int enemy_kick(SDL_Rect* image, enemy* e){
+void move_frog_down(enemy* e){
+
+}
+
+void move_frog_up(enemy* e){
+
+}
+
+int enemy_kick(enemy* e){
     int leftH, rightH, bottomH, topH;
     int leftE, rightE, bottomE, topE;
 
     leftH = HERO.x;
-    rightH = HERO.x + HERO.right_clip[HERO.frames].w;
+    rightH = HERO.x + 45;
     topH = HERO.y;
-    bottomH = HERO.y + HERO.behind_clip[HERO.frames].w + 4;
+    bottomH = HERO.y + 30;
 
-    leftE = e->x;
-    rightE = e->x + 30;
-    topE = e->y;
-    bottomE = e->y + 30;
+    leftE = ((e->y) * 48);
+    rightE = ((e->y) * 48) + 35;
+    topE = ((e->x) * 48) + 40;
+    bottomE = ((e->x) * 48) + 80;
 
-    if(bottomH <= topE){
+    //printf("%d %d\n", e->x, e->y);
+
+    if(topH >= bottomE){
         return false;
     }
 
-    if(topH >= bottomE){
+    if(bottomH <= topE){
         return false;
     }
 

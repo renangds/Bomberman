@@ -92,7 +92,7 @@ enemylist* read_map(enemylist* enemies){
             fscanf(arq, "%s ", str);
             map_stage[i][j] = atoi(str);
             
-            if(map[i][j] == 5){
+            if(map_stage[i][j] == 5){
                 enemies = insert_enemy_list(enemies, i, j, 1);
             }
             
@@ -118,6 +118,11 @@ void draw_enemies(enemylist* enemies){
     if(temp){
         while(temp != NULL){
             ins_object((temp->enemy->y * 48), (temp->enemy->x * 48) + 80, frog_sprite, screen, &ENEMY1.clips[0]);
+            if(enemy_kick(temp->enemy)){
+                HERO.x = PORTAL_RESPAWN.x*48;
+                HERO.y = PORTAL_RESPAWN.y*48;
+                HERO.life -= 1;
+            }
             temp = temp->next;
         }
     }
@@ -165,21 +170,10 @@ void game_start(){
 
     fase1 = IMG_Load("Mapas/stage1.png");
     frog_sprite = IMG_Load("Sprites/frog_m.png");
-    
-    enemy e1;
 
-    e1.x = 200;
-    e1.y = 300;
-    e1.enemyClass = 0;
-
-    OBJ objeto;
-
-    objeto.x = 200;
-    objeto.y = 200;
 
     HERO.x = (PORTAL_RESPAWN.x * 48);
     HERO.y = (PORTAL_RESPAWN.y * 48);
-
 
     while(quit){
         start();
@@ -193,8 +187,6 @@ void game_start(){
                 exit(1);
             }
         }
-
-        
 
         move_actor();
 
@@ -214,7 +206,7 @@ void game_start(){
 
         draw_map();
 
-        //draw_enemies(listEnemies);
+        draw_enemies(listEnemies);
 
         //show_coordinate();
 
