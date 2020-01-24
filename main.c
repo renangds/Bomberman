@@ -91,11 +91,11 @@ enemylist* read_map(enemylist* enemies){
         for(int j = 0; j < 16; j++){
             fscanf(arq, "%s ", str);
             map_stage[i][j] = atoi(str);
-            /*
-            if(map[i][j] == 4){
+            
+            if(map[i][j] == 5){
                 enemies = insert_enemy_list(enemies, i, j, 1);
             }
-            */
+            
            if(map_stage[i][j] == 6){
                PORTAL_RESPAWN.x = i;
                PORTAL_RESPAWN.y = j;
@@ -117,7 +117,7 @@ void draw_enemies(enemylist* enemies){
 
     if(temp){
         while(temp != NULL){
-            //ins_object((temp->enemy->y * 34), (temp->enemy->x * 33), objects, screen, &IOBJ.destructive);
+            ins_object((temp->enemy->y * 48), (temp->enemy->x * 48) + 80, frog_sprite, screen, &ENEMY1.clips[0]);
             temp = temp->next;
         }
     }
@@ -126,9 +126,10 @@ void draw_enemies(enemylist* enemies){
 void draw_map(){
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 16; j++){
-            if(map_stage[i][j] == 2) ins_object((j * 48), (i * 48) + 80, chest, screen, &IOBJ.destructive);
+            if(map_stage[i][j] == 2) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.barrel);
             if(map_stage[i][j] == false) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.indest);
             if(map_stage[i][j] == 4) ins_object((j * 48), (i * 48) + 80, chest, screen, &IOBJ.destructive);
+            //if(map_stage[i][j] == 5) ins_object((j * 48), (i * 48) + 80, frog_sprite, screen, &ENEMY1.clips[0]);
         }
     }
 }
@@ -163,7 +164,7 @@ void game_start(){
     PORTAL.frames = 0;
 
     fase1 = IMG_Load("Mapas/stage1.png");
-    frog_sprite = IMG_Load("Sprites/frog.png");
+    frog_sprite = IMG_Load("Sprites/frog_m.png");
     
     enemy e1;
 
@@ -193,6 +194,8 @@ void game_start(){
             }
         }
 
+        
+
         move_actor();
 
         portal_respawn();
@@ -213,7 +216,7 @@ void game_start(){
 
         //draw_enemies(listEnemies);
 
-        show_coordinate();
+        //show_coordinate();
 
         //portal_on();
 

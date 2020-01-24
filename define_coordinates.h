@@ -76,15 +76,15 @@ void define_coordinates(){
 
     //Frog Clips
 
-    ENEMY1.clips[0].x = 78;
-    ENEMY1.clips[0].y = 6;
-    ENEMY1.clips[0].h = 62;
-    ENEMY1.clips[0].w = 63;
+    ENEMY1.clips[0].x = 85;
+    ENEMY1.clips[0].y = 22;
+    ENEMY1.clips[0].h = 46;
+    ENEMY1.clips[0].w = 46;
 
-    ENEMY1.clips[1].x = 148;
-    ENEMY1.clips[1].y = 7;
-    ENEMY1.clips[1].h = 62;
-    ENEMY1.clips[1].w = 63;
+    ENEMY1.clips[1].x = 153;
+    ENEMY1.clips[1].y = 12;
+    ENEMY1.clips[1].h = 53;
+    ENEMY1.clips[1].w = 54;
 
     //Alguns objetos destrutíveis e indestrutíveis
 
@@ -97,6 +97,11 @@ void define_coordinates(){
     IOBJ.destructive.y = 12;
     IOBJ.destructive.w = 44;
     IOBJ.destructive.h = 42;
+
+    IOBJ.barrel.x = 1251;
+    IOBJ.barrel.y = 1824;
+    IOBJ.barrel.w = 47;
+    IOBJ.barrel.h = 48;
 
     //Explosões
 

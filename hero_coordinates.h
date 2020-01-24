@@ -36,6 +36,7 @@ static struct enemy1_coordinates{
 static struct object_image{
     SDL_Rect destructive;
     SDL_Rect indest;
+    SDL_Rect barrel;
 } IOBJ;
 
 typedef struct object{

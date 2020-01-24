@@ -101,7 +101,9 @@ int collision_right(){
     int leftH = HERO.x;
     int rightI = ((HERO.table_x-1) * 48) + 30;
 
-    if(!map_stage[HERO.table_y-1][HERO.table_x-1] || map_stage[HERO.table_y-1][HERO.table_x-1] == 4){
+    int option = map_stage[HERO.table_y-1][HERO.table_x-1];
+
+    if(!option || option == 4 || option == 2){
 
         if(leftH > rightI) return false;
 
@@ -115,7 +117,9 @@ int collision_top(){
     int topH = HERO.y;
     int bottomI = ((HERO.table_y-2) * 48) + 80;
 
-    if(!map_stage[HERO.table_y-2][HERO.table_x] || map_stage[HERO.table_y-2][HERO.table_x] == 4){
+    int option = map_stage[HERO.table_y-2][HERO.table_x];
+
+    if(!option || option == 4 || option == 2){
         if(topH > bottomI) return false;
 
         return true;
@@ -128,7 +132,9 @@ int collsion_bottom(){
     int bottomH = HERO.y + 30;
     int topI = ((HERO.table_y) * 48) + 40;
 
-    if(!map_stage[HERO.table_y][HERO.table_x] || map_stage[HERO.table_y][HERO.table_x] == 4){
+    int option = map_stage[HERO.table_y][HERO.table_x];
+
+    if(!option || option == 4 || option == 2){
         if(bottomH < topI) return false;
 
         return true;
@@ -141,7 +147,9 @@ int collision_left(){
     int rightH = HERO.x + 45;
     int leftI = ((HERO.table_x+1) * 48);
 
-    if(!map_stage[HERO.table_y-1][HERO.table_x+1] || map_stage[HERO.table_y-1][HERO.table_x+1] == 4){
+    int option = map_stage[HERO.table_y-1][HERO.table_x+1];
+
+    if(!option || option == 4 || option == 2){
         if(rightH <= leftI) return false;
 
         return true;
@@ -163,6 +171,9 @@ void move_actor(){
     if((HERO.y < 0) || (HERO.y + 32 > SCREEN_HEIGHT) || collsion_bottom() || collision_right() || collision_top() || collision_left()){
         HERO.y -= HERO.yVel;
     }
+
+    HERO.table_x = (HERO.x+30)/48;
+    HERO.table_y = (HERO.y+35)/48;
     
 }
 
