@@ -22,6 +22,7 @@ int tempo = 22; //Gambiarra do tempo
 int items[4] = {};
 int map_stage[10][16]; //Está coluna por linha.
 const int _FPS = 22;
+int success = false;
 
 SDL_Event event;
 SDL_Surface* screen;

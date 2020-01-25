@@ -260,4 +260,11 @@ void define_coordinates(){
     PORTAL_RESPAWN.portal.y = 274;
     PORTAL_RESPAWN.portal.h = 37;
     PORTAL_RESPAWN.portal.w = 46;
+
+    //Door
+
+    EXIT.door.x = 288;
+    EXIT.door.y = 48;
+    EXIT.door.h = 48;
+    EXIT.door.w = 48;
 }

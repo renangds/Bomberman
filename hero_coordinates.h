@@ -97,4 +97,10 @@ static struct items{
     SDL_Rect items_bonus[4];
 } ITEMS;
 
+static struct exit{
+    int x;
+    int y;
+    SDL_Rect door;
+}EXIT;
+
 enemylist* listEnemies = NULL;

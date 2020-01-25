@@ -208,7 +208,13 @@ void game_over(){
 
     int quit = true;
 
-    SDL_Surface* img = IMG_Load("Intro/megumin_gameover_2.png");
+    SDL_Surface* img;
+
+    if(success){
+        img = IMG_Load("Intro/megumin_ack.png");
+    } else{
+        img = IMG_Load("Intro/megumin_gameover_2.png");
+    }
 
     SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 148, 57, 72));
     ins_object(0, 80, img, screen, null);
@@ -227,7 +233,7 @@ void stage_clear(){
 }
 
 int its_gameover(){
-    if(HERO.life == 0 || HERO.time == 0){
+    if(HERO.life == 0 || HERO.time == 0 || success){
         return false;
     } else{
         return true;

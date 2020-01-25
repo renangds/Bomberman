@@ -82,7 +82,7 @@ int collision_right(){
 
     int option = map_stage[HERO.table_y-1][HERO.table_x-1];
 
-    if(!option || option == 4 || option == 2 || option == 3){
+    if(!option || option == 4 || option == 2 || option == 3 || option == 7){
 
         if(leftH > rightI) return false;
 
@@ -98,7 +98,7 @@ int collision_top(){
 
     int option = map_stage[HERO.table_y-2][HERO.table_x];
 
-    if(!option || option == 4 || option == 2 || option == 3){
+    if(!option || option == 4 || option == 2 || option == 3 || option == 7){
         if(topH > bottomI) return false;
 
         return true;
@@ -113,7 +113,7 @@ int collsion_bottom(){
 
     int option = map_stage[HERO.table_y][HERO.table_x];
 
-    if(!option || option == 4 || option == 2 || option == 3){
+    if(!option || option == 4 || option == 2 || option == 3 || option == 7){
         if(bottomH < topI) return false;
 
         return true;
@@ -128,7 +128,7 @@ int collision_left(){
 
     int option = map_stage[HERO.table_y-1][HERO.table_x+1];
 
-    if(!option || option == 4 || option == 2 || option == 3){
+    if(!option || option == 4 || option == 2 || option == 3 || option == 7){
         if(rightH <= leftI) return false;
 
         return true;

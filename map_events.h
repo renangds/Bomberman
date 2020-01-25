@@ -48,6 +48,10 @@ enemylist* read_map(enemylist* enemies){
             if(map_stage[i][j] == 4){
                 enemies = insert_enemy_list(enemies, i, j, 4);
             }
+
+            if(map_stage[i][j] == 7){
+                enemies = insert_enemy_list(enemies, i, j, 7);
+            }
             
            if(map_stage[i][j] == 6){
                PORTAL_RESPAWN.x = i * 48;
@@ -67,8 +71,8 @@ enemylist* read_map(enemylist* enemies){
 }
 
 void damage_character(){
-    HERO.x = PORTAL_RESPAWN.x*48;
-    HERO.y = PORTAL_RESPAWN.y*48;
+    HERO.x = 100;
+    HERO.y = 100;
     HERO.life -= 1;
     HERO.status = DOWN;
 }
@@ -119,6 +123,12 @@ void draw_enemies(enemylist* enemies){
                 ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
                 if(enemy_kick(temp->enemy)) damage_character();
             } 
+            if(temp->enemy->enemyClass == 7 && !temp->enemy->isItem){
+                ins_object(temp->enemy->y, temp->enemy->x, exit_portal, screen, &EXIT.door);
+                if(!enemy_kick(temp->enemy)){
+                    if(HERO.haveKey && map_stage[HERO.table_y-2][HERO.table_x] == 7) success = true;
+                }
+            } 
             temp = temp->next;
         }
     }
@@ -128,6 +138,7 @@ void draw_map(){
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 16; j++){
             if(map_stage[i][j] == 2) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.barrel);
+            //if(map_stage[i][j] == 7) ins_object((j * 48), (i * 48) + 80, exit_portal, screen, &EXIT.door);
             if(map_stage[i][j] == false) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.indest);
         }
     }

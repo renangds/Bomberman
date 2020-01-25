@@ -20,6 +20,8 @@ void char_constructor(){
 
 void game_start(){
     int quit = true;
+    success = false;
+    HERO.haveKey = false;
 
     listEnemies = read_map(listEnemies);
 
