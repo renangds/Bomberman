@@ -63,9 +63,9 @@ static struct explosion_animation{
 typedef struct enemy_moves{
     int x;
     int y;
-    int x_cord;
-    int y_cord;
-    int nextMove;
+    int frames;
+    int move;
+    int control;
     int enemyClass;
 } enemy;
 

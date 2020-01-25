@@ -29,6 +29,18 @@ void bomb_timer(){
     }
 }
 
+void destroy_enemy(int x, int y){
+    enemylist* temp = listEnemies;
+
+    if(temp){
+        while(temp != NULL){
+            ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
+            if(enemy_kick(temp->enemy)) damage_character();
+            temp = temp->next;
+        }
+    }
+}
+
 void explosion_animation(){
     
     if(((SDL_GetTicks()/1000) - EXPLOSION.timeStart) > EXPLOSION_DEFAULT){

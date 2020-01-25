@@ -63,8 +63,9 @@ enemylist* insert_enemy_list(enemylist* enemies, int x, int y, int enemyClass){
     enemylist* head = (enemylist*)malloc(sizeof(enemylist));
     enemy* e = (enemy*)malloc(sizeof(enemy));
     e->enemyClass = enemyClass;
-    e->x = x;
-    e->y = y;
+    e->x = (x * 48) + 80;
+    e->y = (y * 48);
+    e->control = 0;
 
     if(!enemies){
         head->enemy = e;
@@ -112,17 +113,20 @@ enemylist* read_map(enemylist* enemies){
     return enemies;
 }
 
+void damage_character(){
+    HERO.x = PORTAL_RESPAWN.x*48;
+    HERO.y = PORTAL_RESPAWN.y*48;
+    HERO.life -= 1;
+}
+
 void draw_enemies(enemylist* enemies){
     enemylist* temp = enemies;
 
     if(temp){
         while(temp != NULL){
-            ins_object((temp->enemy->y * 48), (temp->enemy->x * 48) + 80, frog_sprite, screen, &ENEMY1.clips[0]);
-            if(enemy_kick(temp->enemy)){
-                HERO.x = PORTAL_RESPAWN.x*48;
-                HERO.y = PORTAL_RESPAWN.y*48;
-                HERO.life -= 1;
-            }
+            move_frog_down_up(temp->enemy);
+            ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
+            if(enemy_kick(temp->enemy)) damage_character();
             temp = temp->next;
         }
     }
@@ -134,7 +138,6 @@ void draw_map(){
             if(map_stage[i][j] == 2) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.barrel);
             if(map_stage[i][j] == false) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.indest);
             if(map_stage[i][j] == 4) ins_object((j * 48), (i * 48) + 80, chest, screen, &IOBJ.destructive);
-            //if(map_stage[i][j] == 5) ins_object((j * 48), (i * 48) + 80, frog_sprite, screen, &ENEMY1.clips[0]);
         }
     }
 }
@@ -166,11 +169,13 @@ void game_start(){
     HERO.points = 0;
     HERO.time = 300;
 
+    HERO.xVel = 0;
+    HERO.yVel = 0;
+
     PORTAL.frames = 0;
 
     fase1 = IMG_Load("Mapas/stage1.png");
     frog_sprite = IMG_Load("Sprites/frog_m.png");
-
 
     HERO.x = (PORTAL_RESPAWN.x * 48);
     HERO.y = (PORTAL_RESPAWN.y * 48);
@@ -236,6 +241,9 @@ void game_start(){
             SDL_Delay( ( 1000 / _FPS ) - get_ticks() );
         }
     }
+
+    SDL_FreeSurface(fase1);
+    SDL_FreeSurface(frog_sprite);
 
     game_over();
 }

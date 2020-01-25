@@ -64,12 +64,18 @@ int enemy_collisions(){
     return true;
 }
 
-void move_frog_down(enemy* e){
-
+void move_frog_down_up(enemy* e){
+    if(e->control == 0) e->move = 4;
+    if(e->control == 48) e->move = -4; 
+    e->control += e->move;
+    e->x += e->move;
 }
 
-void move_frog_up(enemy* e){
-
+void move_frog_left_right(enemy* e){
+    if(e->control == 0) e->move = 4;
+    if(e->control == 48) e->move = -4; 
+    e->control += e->move;
+    e->y += e->move;
 }
 
 int enemy_kick(enemy* e){
@@ -81,12 +87,10 @@ int enemy_kick(enemy* e){
     topH = HERO.y;
     bottomH = HERO.y + 30;
 
-    leftE = ((e->y) * 48);
-    rightE = ((e->y) * 48) + 35;
-    topE = ((e->x) * 48) + 40;
-    bottomE = ((e->x) * 48) + 80;
-
-    //printf("%d %d\n", e->x, e->y);
+    leftE = e->y;
+    rightE = e->y + 35;
+    topE = e->x - 40;
+    bottomE = e->x;
 
     if(topH >= bottomE){
         return false;
