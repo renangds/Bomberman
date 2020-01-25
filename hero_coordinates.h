@@ -92,4 +92,4 @@ static struct items{
     SDL_Rect bomb_exploded;
 } ITEMS;
 
-enemylist* listEnemies;
+enemylist* listEnemies = NULL;

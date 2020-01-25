@@ -1,13 +1,18 @@
 void game_time(){
     char time[20];
 
-    int realTime = HERO.time - (SDL_GetTicks()/1000);
+    if(!tempo){
+        tempo = _FPS;
+        HERO.time -= 1;
+    } 
 
-    sprintf(time, "%d", realTime);
+    tempo--;
 
-    if(realTime > 200){
+    sprintf(time, "%d", HERO.time);
+
+    if(HERO.time > 100){
         time_gui = TTF_RenderText_Solid(kono_gui, time, color_menu3);
-    } else if (realTime > 100){
+    } else if (HERO.time > 50){
         time_gui = TTF_RenderText_Solid(kono_gui, time, color_menu2);
     } else{
         time_gui = TTF_RenderText_Solid(kono_gui, time, color_menu1);

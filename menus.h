@@ -18,6 +18,7 @@ void instrucoes(){
             }
         }
 
+        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 148, 57, 72));
         ins_object(0, 0, telaInstrucao, screen, null);
 
         if( SDL_Flip( screen ) == -1 )
@@ -38,8 +39,6 @@ int menu_start(){
     int quit = true;
 
     SDL_Surface* telaIntro = IMG_Load("Intro/kono_intro.png");
-
-    sound_menu = Mix_LoadWAV("Musica/blip_select.wav");
 
     if(telaIntro == -1){
         exit(1);
@@ -66,11 +65,10 @@ int menu_start(){
             }
         }
 
-        /*
         if(Mix_PlayingMusic() == 0){
             Mix_PlayMusic(music_menu, -1);
         }
-        */
+        
 
         Uint8* keystates = SDL_GetKeyState(NULL);
 
@@ -119,6 +117,8 @@ int menu_start(){
                 break;
         }
 
+        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 148, 57, 72));
+
         ins_object(0, 0, telaIntro, screen, null);
 
         ins_object(78, 286, startGame, screen, null);
@@ -136,7 +136,7 @@ int menu_start(){
         }
     }
 
-    Mix_PauseMusic();
+    Mix_HaltMusic();
 
     SDL_FreeSurface(startGame);
     SDL_FreeSurface(instructions);
@@ -183,6 +183,7 @@ void menu_records(){
             }
         }
 
+        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 148, 57, 72));
         ins_object(0, 0, telaRecordes, screen, null);
 
         for(int i = 0; i < 5; i++){
@@ -211,7 +212,8 @@ void game_over(){
 
     SDL_Surface* img = IMG_Load("Intro/megumin_gameover_2.png");
 
-    ins_object(0, 0, img, screen, null);
+    SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 148, 57, 72));
+    ins_object(0, 80, img, screen, null);
 
     if(SDL_Flip(screen) == -1) exit(1);
 
@@ -223,7 +225,7 @@ void game_over(){
 }
 
 int its_gameover(){
-    if(HERO.life == 0){
+    if(HERO.life == 0 || HERO.time == 0){
         return false;
     } else{
         return true;

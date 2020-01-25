@@ -9,44 +9,6 @@
 #include "bomb.h"
 #include "moves_inserts.h"
 
-void show_coordinate(){
-    char x[10];
-    char y[10];
-
-    HERO.table_x = (HERO.x+30)/48;
-    HERO.table_y = (HERO.y+35)/48;
-
-    sprintf(x, "%d ", HERO.x);
-    sprintf(y, "%d ", HERO.y);
-
-    SDL_Surface* coord = TTF_RenderText_Solid(kono_font, strcat(x, y), color_menu1);
-
-    ins_object(100, 100, coord, screen, null);
-
-    char xt[10];
-    char yt[10];
-    char obji[10];
-
-    //HERO.table_x = (HERO.x+23)/33;
-    //HERO.table_y = (HERO.y+25)/34;
-
-    //printf("%d %d\n", HERO.table_x, HERO.table_y);
-
-    sprintf(xt, "%d ", HERO.table_x);
-    sprintf(yt, "%d ", HERO.table_y);
-
-    SDL_Surface* coordTab = TTF_RenderText_Solid(kono_font, strcat(xt, yt), color_menu1);
-
-    ins_object(100, 200, coordTab, screen, null);
-
-    sprintf(obji, "%d ", map_stage[HERO.table_y][HERO.table_x]);
-
-    SDL_Surface* obj = TTF_RenderText_Solid(kono_font, obji, color_menu3);
-
-    ins_object(100, 300, obj, screen, null);
-}
-
-
 void char_constructor(){
     HERO.xVel = 0;
     HERO.yVel = 0;
@@ -113,6 +75,10 @@ enemylist* read_map(enemylist* enemies){
     return enemies;
 }
 
+enemylist* clear_enemies(enemylist* enemies){
+
+}
+
 void damage_character(){
     HERO.x = PORTAL_RESPAWN.x*48;
     HERO.y = PORTAL_RESPAWN.y*48;
@@ -124,7 +90,7 @@ void draw_enemies(enemylist* enemies){
 
     if(temp){
         while(temp != NULL){
-            move_frog_down_up(temp->enemy);
+            //move_frog_down_up(temp->enemy);
             ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
             if(enemy_kick(temp->enemy)) damage_character();
             temp = temp->next;
@@ -167,7 +133,7 @@ void game_start(){
 
     HERO.life = 3;
     HERO.points = 0;
-    HERO.time = 300;
+    HERO.time = 150;
 
     HERO.xVel = 0;
     HERO.yVel = 0;
@@ -199,23 +165,17 @@ void game_start(){
 
         portal_on();
 
-        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 62, 101, 91 ) );
+        SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0, 0, 0 ) );
 
         show_guis();
 
         ins_object(0, 80, fase1, screen, null);
 
-        ins_object((PORTAL_RESPAWN.y * 48), (PORTAL_RESPAWN.x * 48)+80, portal, screen, &PORTAL_RESPAWN.portal);
-
-        //move_enemies(&e1);
+        ins_object(((PORTAL_RESPAWN.y-1) * 48), (PORTAL_RESPAWN.x * 48)+90, portal, screen, &PORTAL_RESPAWN.portal);
 
         draw_map();
 
         draw_enemies(listEnemies);
-
-        //show_coordinate();
-
-        //portal_on();
 
         quit = its_gameover();
 
@@ -230,17 +190,23 @@ void game_start(){
         insert_actor();
 
         if(Mix_PlayingMusic() == 0){
-            //Mix_PlayMusic(main_music, -1);
+            Mix_PlayMusic(main_music, -1);
         }
 
         if(SDL_Flip(screen) == -1){
             return 1;
         }
 
-        if(get_ticks() < 1000 / _FPS){
-            SDL_Delay( ( 1000 / _FPS ) - get_ticks() );
+        if(get_ticks() < 1000/_FPS){
+            SDL_Delay((1000/_FPS) - get_ticks());
         }
     }
+
+    Mix_HaltMusic();
+    
+    free(listEnemies);
+    
+    listEnemies = NULL;
 
     SDL_FreeSurface(fase1);
     SDL_FreeSurface(frog_sprite);

@@ -19,7 +19,7 @@ init_fonts(){
 
     kono_gui = TTF_OpenFont("Fonte/grobold.ttf", 34);
 
-    if(!kono_gui) exit(1);
+    if(!kono_gui || !kono_gui) exit(1);
 }
 
 init_images(){
@@ -57,7 +57,9 @@ init_mixes(){
 
     bomb_explosion = Mix_LoadWAV("Musica/boom.wav");
 
-    if(!drop_bomb || !main_music || !music_menu || !bomb_explosion) exit(1);
+    sound_menu = Mix_LoadWAV("Musica/blip_select.wav");
+
+    if(!drop_bomb || !main_music || !music_menu || !bomb_explosion || !sound_menu) exit(1);
 }
 
 void close_fonts(){
@@ -74,6 +76,7 @@ void close_mixes(){
     Mix_FreeMusic(main_music);
     Mix_FreeChunk(bomb_explosion);
     Mix_FreeChunk(drop_bomb);
+    Mix_FreeChunk(sound_menu);
 }
 
 void init_modules(){

@@ -31,11 +31,22 @@ void bomb_timer(){
 
 void destroy_enemy(int x, int y){
     enemylist* temp = listEnemies;
+    enemylist* ant = null;
 
     if(temp){
         while(temp != NULL){
-            ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
-            if(enemy_kick(temp->enemy)) damage_character();
+            int posx = (temp->enemy->y+35)/48;
+            int posy = (temp->enemy->x-80)/48;
+
+            if(x == posx && y == posy){
+                //HERO.points += 20;
+
+                if(temp == listEnemies){
+
+                }
+            } 
+
+            ant = temp;
             temp = temp->next;
         }
     }
@@ -55,11 +66,15 @@ void explosion_animation(){
 
             map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map+1] = 1;
 
+            destroy_enemy(EXPLOSION.x_map+1, EXPLOSION.y_map-1);
+
             if(map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map+2] > 0){
 
                 ins_object(EXPLOSION.x+96, EXPLOSION.y, explosion_sprite, screen, &EXPLOSION.explosion_right[EXPLOSION.frames+2]);
 
                 map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map+2] = 1;
+
+                destroy_enemy(EXPLOSION.x_map+2, EXPLOSION.y_map-1);
             }
         }
 
@@ -68,12 +83,16 @@ void explosion_animation(){
             ins_object(EXPLOSION.x-48, EXPLOSION.y, explosion_sprite, screen, &EXPLOSION.explosion_left[EXPLOSION.frames]);
 
             map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map-1] = 1;
+
+            destroy_enemy(EXPLOSION.x_map-1, EXPLOSION.y_map-1);
         
             if(map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map-2] > 0){
                 
                 ins_object(EXPLOSION.x-96, EXPLOSION.y, explosion_sprite, screen, &EXPLOSION.explosion_left[EXPLOSION.frames+2]);
 
                 map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map-2] = 1;
+
+                destroy_enemy(EXPLOSION.x_map-2, EXPLOSION.y_map-1);
             }
         }
 
@@ -83,12 +102,16 @@ void explosion_animation(){
             , explosion_sprite, screen, &EXPLOSION.explosion_up[EXPLOSION.frames]);
 
             map_stage[EXPLOSION.y_map-2][EXPLOSION.x_map] = 1;
+
+            destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map-2);
         
             if(map_stage[EXPLOSION.y_map-3][EXPLOSION.x_map] > 0){
                 ins_object(EXPLOSION.x, EXPLOSION.y - (EXPLOSION.explosion_center.h) - (EXPLOSION.explosion_up[EXPLOSION.frames+2].h)
                 , explosion_sprite, screen, &EXPLOSION.explosion_up[EXPLOSION.frames+2]);
 
                 map_stage[EXPLOSION.y_map-3][EXPLOSION.x_map] = 1;
+
+                destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map-3);
             }
         }
 
@@ -98,12 +121,16 @@ void explosion_animation(){
             explosion_sprite, screen, &EXPLOSION.explosion_down[EXPLOSION.frames]);
 
             map_stage[EXPLOSION.y_map][EXPLOSION.x_map] = 1;
+
+            destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map);
         
             if(map_stage[EXPLOSION.y_map+1][EXPLOSION.x_map] > 0){
                 ins_object(EXPLOSION.x, EXPLOSION.y + (EXPLOSION.explosion_center.h)
                     + (EXPLOSION.explosion_down[EXPLOSION.frames+2].h), explosion_sprite, screen, &EXPLOSION.explosion_down[EXPLOSION.frames+2]);
 
                 map_stage[EXPLOSION.y_map+1][EXPLOSION.x_map] = 1;
+
+                destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map+1);
             }
         }
 
