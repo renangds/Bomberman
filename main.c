@@ -83,6 +83,7 @@ void damage_character(){
     HERO.x = PORTAL_RESPAWN.x*48;
     HERO.y = PORTAL_RESPAWN.y*48;
     HERO.life -= 1;
+    HERO.status = DOWN;
 }
 
 void draw_enemies(enemylist* enemies){
@@ -90,7 +91,7 @@ void draw_enemies(enemylist* enemies){
 
     if(temp){
         while(temp != NULL){
-            //move_frog_down_up(temp->enemy);
+            move_frog_down_up(temp->enemy);
             ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
             if(enemy_kick(temp->enemy)) damage_character();
             temp = temp->next;

@@ -1,6 +1,6 @@
 void bomb_handle(){
     if(BOMB.bombStatus == false){
-        //Mix_PlayChannel( -1, drop_bomb, 0 );
+        Mix_PlayChannel( -1, drop_bomb, 0 );
         BOMB.x = ((HERO.table_x) * 48) + 2; //Os 2 são ajustes por causa do pixel!
         BOMB.y = ((HERO.table_y-1) * 48) + 80;
         ins_object(BOMB.x, BOMB.y, bomb, screen, null);
@@ -29,8 +29,8 @@ void bomb_timer(){
     }
 }
 
-void destroy_enemy(int x, int y){
-    enemylist* temp = listEnemies;
+enemylist* destroy_enemy(int x, int y, enemylist* list){
+    enemylist* temp = list;
     enemylist* ant = null;
 
     if(temp){
@@ -39,17 +39,33 @@ void destroy_enemy(int x, int y){
             int posy = (temp->enemy->x-80)/48;
 
             if(x == posx && y == posy){
-                //HERO.points += 20;
+                HERO.points += 20;
 
                 if(temp == listEnemies){
-
+                    enemylist* exc = temp;
+                    temp = temp->next;
+                    free(exc);
+                    return temp;
                 }
+
+                if(!temp->next){
+                    ant->next = null;
+                    free(temp);
+                    return list;
+                }
+
+                ant->next = temp->next;
+                free(temp);
+
+                return list;
             } 
 
             ant = temp;
             temp = temp->next;
         }
     }
+
+    return list;
 }
 
 void explosion_animation(){
@@ -66,7 +82,7 @@ void explosion_animation(){
 
             map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map+1] = 1;
 
-            destroy_enemy(EXPLOSION.x_map+1, EXPLOSION.y_map-1);
+            listEnemies = destroy_enemy(EXPLOSION.x_map+1, EXPLOSION.y_map-1, listEnemies);
 
             if(map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map+2] > 0){
 
@@ -74,7 +90,7 @@ void explosion_animation(){
 
                 map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map+2] = 1;
 
-                destroy_enemy(EXPLOSION.x_map+2, EXPLOSION.y_map-1);
+                listEnemies = destroy_enemy(EXPLOSION.x_map+2, EXPLOSION.y_map-1, listEnemies);
             }
         }
 
@@ -84,7 +100,7 @@ void explosion_animation(){
 
             map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map-1] = 1;
 
-            destroy_enemy(EXPLOSION.x_map-1, EXPLOSION.y_map-1);
+            listEnemies = destroy_enemy(EXPLOSION.x_map-1, EXPLOSION.y_map-1, listEnemies);
         
             if(map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map-2] > 0){
                 
@@ -92,7 +108,7 @@ void explosion_animation(){
 
                 map_stage[EXPLOSION.y_map-1][EXPLOSION.x_map-2] = 1;
 
-                destroy_enemy(EXPLOSION.x_map-2, EXPLOSION.y_map-1);
+                listEnemies = destroy_enemy(EXPLOSION.x_map-2, EXPLOSION.y_map-1, listEnemies);
             }
         }
 
@@ -103,7 +119,7 @@ void explosion_animation(){
 
             map_stage[EXPLOSION.y_map-2][EXPLOSION.x_map] = 1;
 
-            destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map-2);
+            listEnemies = destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map-2, listEnemies);
         
             if(map_stage[EXPLOSION.y_map-3][EXPLOSION.x_map] > 0){
                 ins_object(EXPLOSION.x, EXPLOSION.y - (EXPLOSION.explosion_center.h) - (EXPLOSION.explosion_up[EXPLOSION.frames+2].h)
@@ -111,7 +127,7 @@ void explosion_animation(){
 
                 map_stage[EXPLOSION.y_map-3][EXPLOSION.x_map] = 1;
 
-                destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map-3);
+                listEnemies = destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map-3, listEnemies);
             }
         }
 
@@ -122,7 +138,7 @@ void explosion_animation(){
 
             map_stage[EXPLOSION.y_map][EXPLOSION.x_map] = 1;
 
-            destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map);
+            listEnemies = destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map, listEnemies);
         
             if(map_stage[EXPLOSION.y_map+1][EXPLOSION.x_map] > 0){
                 ins_object(EXPLOSION.x, EXPLOSION.y + (EXPLOSION.explosion_center.h)
@@ -130,7 +146,7 @@ void explosion_animation(){
 
                 map_stage[EXPLOSION.y_map+1][EXPLOSION.x_map] = 1;
 
-                destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map+1);
+                listEnemies = destroy_enemy(EXPLOSION.x_map, EXPLOSION.y_map+1, listEnemies);
             }
         }
 

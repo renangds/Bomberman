@@ -18,10 +18,9 @@ static int SCREEN_WIDTH = 768; //O TAMANHO DO BLOCO É 48X48!
 static int SCREEN_HEIGHT = 560; //A altura da imagem original do game é 480px, diferença de 40px atualmente 
 static int SCREEN_BPP = 32;
 
-int tempo = 22;
-
-int map[13][22];
+int tempo = 22; //Gambiarra do tempo
 int map_stage[10][16]; //Está coluna por linha.
+const int _FPS = 22;
 
 SDL_Event event;
 SDL_Surface* screen;
@@ -68,8 +67,6 @@ Mix_Chunk* bomb_explosion = null;
 Mix_Music* main_music = null;
 
 Mix_Music* music_menu = null;
-
-const int _FPS = 22;
 
 #define LEFT 0
 #define RIGHT 1
