@@ -30,7 +30,6 @@ void define_coordinates(){
     HERO.behind_clip[2].h = 72;
     HERO.behind_clip[2].w = 60;
 
-    
     HERO.left_clip[0].x = 1;
     HERO.left_clip[0].y = 73;
     HERO.left_clip[0].h = 71;
@@ -45,7 +44,6 @@ void define_coordinates(){
     HERO.left_clip[2].y = 73;
     HERO.left_clip[2].h = 71;
     HERO.left_clip[2].w = 62;
-
 
     HERO.right_clip[0].x = 0;
     HERO.right_clip[0].y = 145;
@@ -102,6 +100,11 @@ void define_coordinates(){
     IOBJ.barrel.y = 1824;
     IOBJ.barrel.w = 47;
     IOBJ.barrel.h = 48;
+
+    IOBJ.blue_chest.x = 524;
+    IOBJ.blue_chest.y = 12;
+    IOBJ.blue_chest.h = 42;
+    IOBJ.blue_chest.w = 45;
 
     //Explosões
 
@@ -224,6 +227,32 @@ void define_coordinates(){
     ITEMS.bomb_exploded.y = 60;
     ITEMS.bomb_exploded.h = 36;
     ITEMS.bomb_exploded.w = 42;
+
+    //Ponto extra
+    ITEMS.items_bonus[1].x = 411;
+    ITEMS.items_bonus[1].y = 159;
+    ITEMS.items_bonus[1].h = 45;
+    ITEMS.items_bonus[1].w = 45;
+
+    //Temp extra
+    ITEMS.items_bonus[0].x = 258;
+    ITEMS.items_bonus[0].y = 156;
+    ITEMS.items_bonus[0].h = 48;
+    ITEMS.items_bonus[0].w = 45;
+
+    //Vida extra
+
+    ITEMS.items_bonus[2].x = 513;
+    ITEMS.items_bonus[2].y = 312;
+    ITEMS.items_bonus[2].h = 42;
+    ITEMS.items_bonus[2].w = 48;
+
+    //Chave
+
+    ITEMS.items_bonus[3].x = 264;
+    ITEMS.items_bonus[3].y = 360;
+    ITEMS.items_bonus[3].h = 48;
+    ITEMS.items_bonus[3].w = 36;
 
     //Portal de início
 

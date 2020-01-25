@@ -14,7 +14,6 @@ void bomb_handle(){
 
 void bomb_timer(){
     if(((SDL_GetTicks()/1000) - BOMB.timeStart) > BOMB_DEFAULT){
-        if(map_stage[BOMB.y_map-1][BOMB.x_map+1] == 4) map_stage[BOMB.y_map-1][BOMB.x_map+1] = 1;
         EXPLOSION.x = BOMB.x-3;
         EXPLOSION.y = BOMB.y-3;
         EXPLOSION.x_map = BOMB.x_map;
@@ -38,8 +37,20 @@ enemylist* destroy_enemy(int x, int y, enemylist* list){
             int posx = (temp->enemy->y+35)/48;
             int posy = (temp->enemy->x-80)/48;
 
-            if(x == posx && y == posy){
+            if(x == posx && y == posy && !temp->enemy->isItem){
                 HERO.points += 20;
+
+                if(temp->enemy->enemyClass == 3){
+                    temp->enemy->isItem = true;
+                    temp->enemy->itemType = rand()%3;
+                    return list;
+                }
+
+                if(temp->enemy->enemyClass == 4){
+                    temp->enemy->isItem = true;
+                    temp->enemy->itemType = 3;
+                    return list;
+                }
 
                 if(temp == listEnemies){
                     enemylist* exc = temp;

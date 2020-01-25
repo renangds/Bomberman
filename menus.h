@@ -136,8 +136,6 @@ int menu_start(){
         }
     }
 
-    Mix_HaltMusic();
-
     SDL_FreeSurface(startGame);
     SDL_FreeSurface(instructions);
     SDL_FreeSurface(exitGame);
@@ -222,6 +220,10 @@ void game_over(){
     SDL_Delay(5000);
 
     SDL_free(img);
+}
+
+void stage_clear(){
+
 }
 
 int its_gameover(){

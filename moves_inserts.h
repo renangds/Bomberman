@@ -15,9 +15,6 @@ void event_keyboard_handle(){
             case SDLK_LEFT: HERO.xVel -= 5; HERO.status = LEFT; break;
             case SDLK_RIGHT: HERO.xVel += 5; HERO.status = RIGHT; break;
             case SDLK_SPACE: bomb_handle(); break;
-            case SDLK_F10: HERO.life -= 1; break;
-            case SDLK_F11: HERO.points += 10; break;
-            case SDLK_F9: HERO.life = 3; break;
         }
     } else if (event.type == SDL_KEYUP){
         if(HERO.yVel != 30 || HERO.xVel != 30){
@@ -40,7 +37,7 @@ void move_frog_down_up(enemy* e){
 
 void move_frog_left_right(enemy* e){
     if(e->control == 0) e->move = 4;
-    if(e->control == 48) e->move = -4; 
+    if(e->control == 96) e->move = -4; 
     e->control += e->move;
     e->y += e->move;
 }
@@ -85,7 +82,7 @@ int collision_right(){
 
     int option = map_stage[HERO.table_y-1][HERO.table_x-1];
 
-    if(!option || option == 4 || option == 2){
+    if(!option || option == 4 || option == 2 || option == 3){
 
         if(leftH > rightI) return false;
 
@@ -101,7 +98,7 @@ int collision_top(){
 
     int option = map_stage[HERO.table_y-2][HERO.table_x];
 
-    if(!option || option == 4 || option == 2){
+    if(!option || option == 4 || option == 2 || option == 3){
         if(topH > bottomI) return false;
 
         return true;
@@ -116,7 +113,7 @@ int collsion_bottom(){
 
     int option = map_stage[HERO.table_y][HERO.table_x];
 
-    if(!option || option == 4 || option == 2){
+    if(!option || option == 4 || option == 2 || option == 3){
         if(bottomH < topI) return false;
 
         return true;
@@ -131,7 +128,7 @@ int collision_left(){
 
     int option = map_stage[HERO.table_y-1][HERO.table_x+1];
 
-    if(!option || option == 4 || option == 2){
+    if(!option || option == 4 || option == 2 || option == 3){
         if(rightH <= leftI) return false;
 
         return true;

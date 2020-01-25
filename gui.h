@@ -30,7 +30,7 @@ void sum_point(){
 
     points_gui = TTF_RenderText_Solid(kono_gui, point, color_menu2);
 
-    ins_object(530, 25, points_gui, screen, null);
+    ins_object(480, 25, points_gui, screen, null);
 }
 
 void life_game(){
@@ -39,6 +39,10 @@ void life_game(){
    for(int i = 0; i < HERO.life; i++){
        ins_object(30 + (i*HERO.heart_clip[0].w), 20, heart_sprite, screen, &HERO.heart_clip[0]);
    }
+}
+
+void key_gui(){
+    if(HERO.haveKey) ins_object(600, 15, items_game, screen, &ITEMS.items_bonus[3]);
 }
 
 void bomb_show_gui(){
@@ -58,6 +62,7 @@ void show_guis(){
     game_time();
     sum_point();
     life_game();
+    key_gui();
     bomb_show_gui();
     explosion_show_gui();
 }

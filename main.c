@@ -6,8 +6,9 @@
 #include "record.h"
 #include "menus.h"
 #include "gui.h"
-#include "bomb.h"
 #include "moves_inserts.h"
+#include "bomb.h"
+#include "map_events.h"
 
 void char_constructor(){
     HERO.xVel = 0;
@@ -15,116 +16,6 @@ void char_constructor(){
     HERO.x = 162;
     HERO.y = 110;
     HERO.status = DOWN;
-}
-
-void ia_enemy_up(){
-
-}
-
-enemylist* insert_enemy_list(enemylist* enemies, int x, int y, int enemyClass){
-    enemylist* head = (enemylist*)malloc(sizeof(enemylist));
-    enemy* e = (enemy*)malloc(sizeof(enemy));
-    e->enemyClass = enemyClass;
-    e->x = (x * 48) + 80;
-    e->y = (y * 48);
-    e->control = 0;
-
-    if(!enemies){
-        head->enemy = e;
-        head->next = null;
-
-        return head;
-    } else{
-        head->next = enemies;
-        head->enemy = e;
-
-        return head;
-    }
-}
-
-enemylist* read_map(enemylist* enemies){
-    FILE* arq;
-    char* str[2];
-
-    if((arq = fopen("Arquivos/stage1.txt", "r")) == null){
-        exit(1);
-    }
-
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 16; j++){
-            fscanf(arq, "%s ", str);
-            map_stage[i][j] = atoi(str);
-            
-            if(map_stage[i][j] == 5){
-                enemies = insert_enemy_list(enemies, i, j, 1);
-            }
-            
-           if(map_stage[i][j] == 6){
-               PORTAL_RESPAWN.x = i;
-               PORTAL_RESPAWN.y = j;
-           }
-            if(map_stage[i][j] == 5){
-                PORTAL.x = i;
-                PORTAL.y = j;
-            }
-        }
-    }
-
-    fclose(arq);
-
-    return enemies;
-}
-
-enemylist* clear_enemies(enemylist* enemies){
-
-}
-
-void damage_character(){
-    HERO.x = PORTAL_RESPAWN.x*48;
-    HERO.y = PORTAL_RESPAWN.y*48;
-    HERO.life -= 1;
-    HERO.status = DOWN;
-}
-
-void draw_enemies(enemylist* enemies){
-    enemylist* temp = enemies;
-
-    if(temp){
-        while(temp != NULL){
-            move_frog_down_up(temp->enemy);
-            ins_object(temp->enemy->y, temp->enemy->x, frog_sprite, screen, &ENEMY1.clips[0]);
-            if(enemy_kick(temp->enemy)) damage_character();
-            temp = temp->next;
-        }
-    }
-}
-
-void draw_map(){
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 16; j++){
-            if(map_stage[i][j] == 2) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.barrel);
-            if(map_stage[i][j] == false) ins_object((j * 48), (i * 48) + 80, stage_objs, screen, &IOBJ.indest);
-            if(map_stage[i][j] == 4) ins_object((j * 48), (i * 48) + 80, chest, screen, &IOBJ.destructive);
-        }
-    }
-}
-
-void portal_on(){
-    ins_object((PORTAL.y * 33) - 5, (PORTAL.x * 37) + PORTAL.portal_animation[PORTAL.frames].h, portal, screen, &PORTAL.portal_animation[PORTAL.frames]);
-
-    PORTAL.frames++;
-
-    if(PORTAL.frames == 2){
-        PORTAL.frames = 0;
-    }
-}
-
-void stage_clear(){
-
-}
-
-void portal_respawn(){
-    ins_object(PORTAL_RESPAWN.y * 48, PORTAL_RESPAWN.x * 48, portal, screen, &PORTAL_RESPAWN.portal);
 }
 
 void game_start(){
@@ -144,8 +35,8 @@ void game_start(){
     fase1 = IMG_Load("Mapas/stage1.png");
     frog_sprite = IMG_Load("Sprites/frog_m.png");
 
-    HERO.x = (PORTAL_RESPAWN.x * 48);
-    HERO.y = (PORTAL_RESPAWN.y * 48);
+    HERO.x = PORTAL_RESPAWN.x;
+    HERO.y = PORTAL_RESPAWN.y;
 
     while(quit){
         start();
@@ -230,6 +121,7 @@ int main(){
         int option = menu_start();
 
         if(option == 0){
+            Mix_HaltMusic();
             game_start();
         } else if (option == 1){
             instrucoes();

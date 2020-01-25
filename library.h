@@ -19,6 +19,7 @@ static int SCREEN_HEIGHT = 560; //A altura da imagem original do game é 480px, 
 static int SCREEN_BPP = 32;
 
 int tempo = 22; //Gambiarra do tempo
+int items[4] = {};
 int map_stage[10][16]; //Está coluna por linha.
 const int _FPS = 22;
 
@@ -38,6 +39,7 @@ SDL_Surface* stage_objs;
 SDL_Surface* chest;
 SDL_Surface* items_game;
 SDL_Surface* background_gui;
+SDL_Surface* exit_portal;
 
 SDL_Surface* life_gui;
 SDL_Surface* time_gui;
@@ -64,6 +66,11 @@ SDL_Color background_status = {62, 101, 91};
 Mix_Chunk* sound_menu = null;
 Mix_Chunk* drop_bomb = null;
 Mix_Chunk* bomb_explosion = null;
+
+Mix_Chunk* sound_getkey = null;
+Mix_Chunk* sound_gettime = null;
+Mix_Chunk* sound_getothers = null;
+
 Mix_Music* main_music = null;
 
 Mix_Music* music_menu = null;

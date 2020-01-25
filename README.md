@@ -1,7 +1,7 @@
 # Bomberman
 Trabalho para a AA de Computação 1 (2019.3)
 
-<h1>BomberSuba: Megumin's Final Explosion!</h1>
+<h1>BomberSuba: Megumin's Last Explosion!</h1>
 
 <center>
 

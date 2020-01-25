@@ -15,6 +15,7 @@ static struct hero{
     int life;
     int points;
     int time;
+    int haveKey;
 } HERO;
 
 static struct bomb{
@@ -37,6 +38,7 @@ static struct object_image{
     SDL_Rect destructive;
     SDL_Rect indest;
     SDL_Rect barrel;
+    SDL_Rect blue_chest;
 } IOBJ;
 
 typedef struct object{
@@ -67,6 +69,8 @@ typedef struct enemy_moves{
     int move;
     int control;
     int enemyClass;
+    int isItem;
+    int itemType;
 } enemy;
 
 typedef struct enemy_list{
@@ -90,6 +94,7 @@ static struct portal_init{
 static struct items{
     SDL_Rect bomb_activate;
     SDL_Rect bomb_exploded;
+    SDL_Rect items_bonus[4];
 } ITEMS;
 
 enemylist* listEnemies = NULL;

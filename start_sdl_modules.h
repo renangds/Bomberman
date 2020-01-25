@@ -45,6 +45,8 @@ init_images(){
     
     background_gui = IMG_Load("Sprites/background_gui.png");
 
+    exit_portal = IMG_Load("Sprites/portal.png");
+
     if(!heart_sprite || !map_characters) exit(1);
 }
 
@@ -59,7 +61,13 @@ init_mixes(){
 
     sound_menu = Mix_LoadWAV("Musica/blip_select.wav");
 
-    if(!drop_bomb || !main_music || !music_menu || !bomb_explosion || !sound_menu) exit(1);
+    sound_getkey = Mix_LoadWAV("Musica/getkey.wav");
+
+    sound_gettime = Mix_LoadWAV("Musica/gettime.wav");
+
+    sound_getothers = Mix_LoadWAV("Musica/getothers.wav");
+
+    if(!drop_bomb || !main_music || !music_menu || !bomb_explosion || !sound_menu || !sound_getothers || !sound_gettime || !sound_getkey) exit(1);
 }
 
 void close_fonts(){
@@ -77,6 +85,9 @@ void close_mixes(){
     Mix_FreeChunk(bomb_explosion);
     Mix_FreeChunk(drop_bomb);
     Mix_FreeChunk(sound_menu);
+    Mix_FreeChunk(sound_getkey);
+    Mix_FreeChunk(sound_getothers);
+    Mix_FreeChunk(sound_gettime);
 }
 
 void init_modules(){
