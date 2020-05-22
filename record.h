@@ -1,3 +1,5 @@
+#define TOTAL 5
+
 void sort_records(int gamePoint){
     FILE* fl;
     char point[20];
@@ -18,8 +20,8 @@ void sort_records(int gamePoint){
     if(gamePoint > points[4]){
         points[4] = gamePoint;
 
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 5-1; j++){
+        for(int i = 0; i < TOTAL; i++){
+            for(int j = 0; j < TOTAL-1; j++){
                 if(points[j] < points[j+1]){
                     int swap = points[j];
                     points[j] = points[j+1];
