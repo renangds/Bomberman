@@ -11,7 +11,6 @@
 #include "map_events.h"
 
 
-
 void char_constructor(){
     HERO.xVel = 0;
     HERO.yVel = 0;
@@ -21,6 +20,7 @@ void char_constructor(){
 }
 
 void game_start(){
+    int x, y, z;
     int quit = true;
     success = false;
     HERO.haveKey = false;
