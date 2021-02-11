@@ -10,6 +10,8 @@
 #include "bomb.h"
 #include "map_events.h"
 
+
+
 void char_constructor(){
     HERO.xVel = 0;
     HERO.yVel = 0;
